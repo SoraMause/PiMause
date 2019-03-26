@@ -1,4 +1,4 @@
-# ラズベリーパイマウスのレポジトリ
+# ラズベリーパイマウスのリポジトリ
 
 ## ファイル構造
 - pimause
@@ -48,7 +48,7 @@
  - 迷路
     - クラシックマイクロマウス競技の16*16マスの迷路を足立法で解くプログラムを作成
  - ペリファイラル設定
-    - [株式会社RT ラズベリーパイマウスのドライバレポジトリ](https://github.com/rt-net/RaspberryPiMouse)
+    - [RT Corp.RaspberryPiMouseリポジトリ](https://github.com/rt-net/RaspberryPiMouse)
     のドライバをたたき、LED,ブザー、モーター、スイッチを使用できるようにするクラスを作成
  
  
