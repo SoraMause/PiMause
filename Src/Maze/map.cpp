@@ -1,0 +1,198 @@
+/**
+ * map.cpp
+ * @author yuta seya
+ * @date 2019 3.13 
+*/
+
+#include "map.h"
+
+/**
+ * @brief マップクラスのコンストラクタ
+ * @param なし
+ * @return　なし
+*/
+Map::Map()
+{
+
+}
+
+/**
+ * @brief マップクラスのデストラクタ
+ * @param なし
+ * @return　なし
+*/
+Map::~Map()
+{
+
+}
+
+/**
+ * @brief 壁情報の初期化
+ * @param なし
+ * @return　なし
+ * @detail マイクロマウスのルールに合わせて初期壁の追加,
+ *         壁情報の初期化を行う.
+*/
+void Map::init()
+{
+  for ( int i = 0; i < 17; i++ ){
+    wall.vertical[i] = 0x0000;
+    wall.horizontal[i] = 0x0000;
+  }
+
+  // 外周、スタートの右壁を追加
+  wall.vertical[0] = 0xffff;
+  wall.vertical[1] = 0x0001;
+  wall.horizontal[0] = 0xffff;
+  wall.vertical[16] = 0xffff;
+  wall.horizontal[16] = 0xffff;
+}
+
+/**
+ * @brief 壁情報の追加
+ * @param uint8_t x マウスのx座標
+ * @param uint8_t y マウスのy座標
+ * @param ExistWall *exist 壁があるかないかの情報が入っている構造体
+ * @return　なし
+ * @detail 引数に与えられた座標の壁情報を追加する.
+*/
+void Map::addWall( uint8_t x, uint8_t y, ExistWall *exist )
+{
+  manegeNorthWall( x, y, exist->north );
+  manegeWestWall( x, y, exist->west );
+  manegeSouthWall( x, y, exist->south );
+  manegeEastWall( x, y, exist->east );
+}
+
+/**
+ * @brief 壁情報の読み出し
+ * @param uint8_t x マウスのx座標
+ * @param uint8_t y マウスのy座標
+ * @param uint8_t direction 取得したい壁の方位
+ * @return bool 壁情報　有 : true, 無 : false
+ * @detail 引数に与えられた座標、方向の壁情報を返す
+*/
+bool Map::getData( uint8_t x, uint8_t y, uint8_t direction )
+{
+  uint16_t check_wall = 1;
+  bool exist = false;
+
+  if ( direction > East ){
+    direction -= 4;
+  }
+
+  if ( direction == North ){
+		check_wall <<= x;
+		check_wall &= wall.horizontal[y + 1];
+		if (check_wall != 0) {
+			exist = true;
+		} else {
+      exist = false;
+    }
+
+  } else if ( direction == East ){
+		check_wall <<= y;
+		check_wall &= wall.vertical[x + 1];
+		if (check_wall != 0) {
+			exist = true;
+		} else {
+      exist = false;
+    }
+
+  } else if ( direction == South ){
+		check_wall <<= x;
+		check_wall &= wall.horizontal[y];
+		if (check_wall != 0) {
+			exist = true;
+		} else {
+      exist = false;
+    }
+  } else if ( direction == West ){
+		check_wall <<= y;
+		check_wall &= wall.vertical[x];
+		if (check_wall != 0) {
+			exist = true;
+		} else {
+      exist = false;
+    }
+  }
+
+  return exist;
+}
+
+/**
+ * @brief 北壁情報の追加/削除
+ * @param uint8_t x マウスのx座標
+ * @param uint8_t y マウスのy座標
+ * @param bool exist 壁が存在するか否か
+ * @return　なし
+ * @detail 引数に与えられた座標の北壁情報を追加する.
+*/
+void Map::manegeNorthWall( uint8_t x, uint8_t y, bool exist )
+{
+  uint16_t data = 1;
+  data <<= x;
+  if ( exist ){
+    wall.horizontal[y+1] |= data; 
+  } else {
+    wall.horizontal[y+1] &= ~data; 
+  }
+}
+
+/**
+ * @brief 南壁情報の追加/削除
+ * @param uint8_t x マウスのx座標
+ * @param uint8_t y マウスのy座標
+ * @param bool exist 壁が存在するか否か
+ * @return　なし
+ * @detail 引数に与えられた座標の南壁情報を追加する.
+*/
+void Map::manegeSouthWall( uint8_t x, uint8_t y, bool exist )
+{
+  uint16_t data = 1;
+  data <<= x;
+  if ( exist ){
+    wall.horizontal[y] |= data; 
+  } else {
+    wall.horizontal[y] &= ~data; 
+  }  
+}
+
+/**
+ * @brief 西壁情報の追加/削除
+ * @param uint8_t x マウスのx座標
+ * @param uint8_t y マウスのy座標
+ * @param bool exist 壁が存在するか否か
+ * @return　なし
+ * @detail 引数に与えられた座標の西壁情報を追加する.
+*/
+void Map::manegeWestWall( uint8_t x, uint8_t y, bool exist )
+{
+  uint16_t data = 1;
+  data <<= y;
+  if ( exist ){
+    wall.vertical[x] |= data; 
+  } else {
+    wall.vertical[x] &= ~data; 
+  }  
+}
+
+/**
+ * @brief 東壁情報の追加/削除
+ * @param uint8_t x マウスのx座標
+ * @param uint8_t y マウスのy座標
+ * @param bool exist 壁が存在するか否か
+ * @return　なし
+ * @detail 引数に与えられた座標の東壁情報を追加する.
+*/
+void Map::manegeEastWall( uint8_t x, uint8_t y, bool exist )
+{
+  uint16_t data = 1;
+  data <<= y;
+  if ( exist ){
+    wall.vertical[x+1] |= data; 
+  } else {
+    wall.vertical[x+1] &= ~data; 
+  }  
+}
+
