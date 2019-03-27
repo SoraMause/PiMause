@@ -12,10 +12,9 @@
 
 struct ExistWall
 {
-  bool north;
-  bool west;
-  bool south;
-  bool east;
+  bool front;
+  bool left;
+  bool right;
 };
 
 class Map
@@ -42,7 +41,7 @@ public:
   void init();
 
   // 壁情報の追加
-  void addWall( uint8_t x, uint8_t y, ExistWall *exist );
+  void addWall( uint8_t x, uint8_t y, ExistWall *exist, uint8_t direction );
 
   // 壁情報を読み出す
   bool getData( uint8_t x, uint8_t y, uint8_t direction );

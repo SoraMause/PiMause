@@ -63,8 +63,8 @@ void Motor::control( int left, int right )
 
 /**
  * @brief モーターのステップ数のカウンタを読む
- * @param int left 左側のカウント
- * @param int right 右側のカウント
+ * @param int *left 左側のカウント
+ * @param int *right 右側のカウント
  * @return なし
 */
 void Motor::readStepCount( int *left, int *right )

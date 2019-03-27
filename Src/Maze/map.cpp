@@ -56,12 +56,90 @@ void Map::init()
  * @return　なし
  * @detail 引数に与えられた座標の壁情報を追加する.
 */
-void Map::addWall( uint8_t x, uint8_t y, ExistWall *exist )
+void Map::addWall(  uint8_t x, uint8_t y, ExistWall *exist, uint8_t direction )
 {
-  manegeNorthWall( x, y, exist->north );
-  manegeWestWall( x, y, exist->west );
-  manegeSouthWall( x, y, exist->south );
-  manegeEastWall( x, y, exist->east );
+  switch( direction ){
+    case North:
+      if ( exist->left ){
+        manegeWestWall( x, y, true );
+      } else {
+        manegeWestWall( x, y, false );
+      }
+
+      if ( exist->right ){
+        manegeEastWall( x, y, true );
+      } else {
+        manegeEastWall( x, y, false );
+      }
+
+      if ( exist->front ){
+        manegeNorthWall( x, y, true );
+      } else {
+        manegeNorthWall( x, y, false );
+      }
+      break;
+
+    case West:
+      if ( exist->left ){
+        manegeSouthWall( x, y, true );
+      } else {
+        manegeSouthWall( x, y, false );
+      }
+
+      if ( exist->right ){
+        manegeNorthWall( x, y, true );
+      } else {
+        manegeNorthWall( x, y, false );
+      }
+
+      if ( exist->front ){
+        manegeWestWall( x, y, true );
+      } else {
+        manegeWestWall( x, y, false );
+      }
+      break;
+
+    case South:
+      if ( exist->left ){
+        manegeEastWall( x, y, true );
+      } else {
+        manegeEastWall( x, y, false );
+      }
+
+      if ( exist->right ){
+        manegeWestWall( x, y, true );
+      } else {
+        manegeWestWall( x, y, false );
+      }
+
+      if ( exist->front ){
+        manegeSouthWall( x, y, true );
+      } else {
+        manegeSouthWall( x, y, false );
+      }
+      break;
+
+    case East:
+      if ( exist->left ){
+        manegeNorthWall( x, y, true );
+      } else {
+        manegeNorthWall( x, y, false );
+      }
+
+      if ( exist->right ){
+        manegeSouthWall( x, y, true );
+      } else {
+        manegeSouthWall( x, y, false );
+      }
+
+      if ( exist->front ){
+        manegeEastWall( x, y, true );
+      } else {
+        manegeEastWall( x, y, false );
+      }
+      break;
+
+  }
 }
 
 /**

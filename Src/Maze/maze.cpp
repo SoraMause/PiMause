@@ -76,7 +76,7 @@ uint8_t Maze::getNextAction( Position *pos, ExistWall *exist )
     updatePosition( pos, 0 );
     start = false;
   } else {
-    map->addWall( pos->x, pos-> y, exist );
+    map->addWall( pos->x, pos-> y, exist, pos->direction );
     updateStepMap();
     next = updateNextAction( pos );
     updatePosition( pos, next );
