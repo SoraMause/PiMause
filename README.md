@@ -50,6 +50,7 @@
  - ペリファイラル設定
     - [RT Corp.RaspberryPiMouseリポジトリ](https://github.com/rt-net/RaspberryPiMouse)
     のドライバをたたき、LED,ブザー、モーター、スイッチを使用できるようにするクラスを作成
+    - センサを読めるようにするクラスを作成
  
  
  ## 参考文献
@@ -64,5 +65,7 @@
 [シンプルで応用の利くmakefile URIN HACK](http://urin.github.io/posts/2013/simple-makefile-for-clang)
 
 ### 更新日
-2019 3/26
+2019 3 / 26 ver 1.0
+
+2019 3 / 27 ver 1.1
 
