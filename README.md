@@ -59,7 +59,7 @@
 
 [ラズベリーパイマウスの商品ページ](https://www.rt-net.jp/products/raspimouse2)
 
-このレポジトリの中に以下のソースコードを含みます。
+このりポジトリの中に以下のソースコードを含みます。
 
 
 [シンプルで応用の利くmakefile URIN HACK](http://urin.github.io/posts/2013/simple-makefile-for-clang)
