@@ -62,6 +62,87 @@ void Motor::control( int left, int right )
 }
 
 /**
+ * @brief モーターのステップ数のカウンタを読む
+ * @param int left 左側のカウント
+ * @param int right 右側のカウント
+ * @return なし
+*/
+void Motor::readStepCount( int *left, int *right )
+{
+  *left = readLeft();
+  *right = readRight();
+}
+
+/**
+ * @brief 左モーターのステップ数のカウンタを読む
+ * @param なし
+ * @return int left 左のカウント
+*/
+int Motor::readLeft()
+{
+  int left = 0;
+  std::FILE *data;
+
+  data = std::fopen( "/dev/rtcounter_l0", "r" );
+  std::fscanf( data, "%d", &left );
+  std::fclose( data );
+  return left;
+}
+
+/**
+ * @brief 右モーターのステップ数のカウンタを読む
+ * @param なし
+ * @return int right 右のカウント
+ * */
+int Motor::readRight()
+{
+  int right = 0;
+  std::FILE *data;
+
+  data = std::fopen( "/dev/rtcounter_r0", "r" );
+  std::fscanf( data, "%d", &right );
+  std::fclose( data );
+  return right;
+}
+
+/**
+ * @brief モーターのステップ数をリセットする
+ * @param なし
+ * @return なし
+ * */
+void Motor::resetStepCount()
+{
+  resetLeftStep();
+  resetRightStep();
+}
+
+/**
+ * @brief 左モーターのステップ数をリセットする
+ * @param なし
+ * @return なし
+ * */
+void Motor::resetLeftStep()
+{
+  std::FILE *count;
+  count = std::fopen( "/dev/rtcounter_l0", "w" );
+  std::fprintf( count, "0" );
+  std::fclose( count );
+}
+
+/**
+ * @brief 右モーターのステップ数のカウンタを読む
+ * @param なし
+ * @return なし
+ * */
+void Motor::resetRightStep()
+{
+  std::FILE *count;
+  count = std::fopen( "/dev/rtcounter_r0", "w" );
+  std::fprintf( count, "0" );
+  std::fclose( count );
+}
+
+/**
  * @brief ソフトウェアスイッチのオフ
  * @param なし
  * @return なし

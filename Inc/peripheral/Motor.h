@@ -24,7 +24,13 @@ public:
   // モーターのコントロールをする
   void control( int left, int right );
 
-public:
+  // モーターのステップ数のカウンタを読む
+  void readStepCount( int *left, int *right );
+
+  // モーターのステップ数をカウントをリセットする
+  void resetStepCount();
+
+private:
   // 左モーターのコントロール
   void leftControl( int hz );
 
@@ -36,6 +42,20 @@ public:
 
   // ソフトウェアスイッチのオフ
   void off();
+
+  // 左のカウント
+  int readLeft();
+
+  // 右のカウント
+  int readRight();
+
+  // 左のカウントをリセット
+  void resetLeftStep();
+
+  // 右のカウントをリセット
+  void resetRightStep();
+
+
 };
 
 #endif /* __MOTOR__H */
