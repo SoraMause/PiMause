@@ -36,7 +36,7 @@ public:
   ~Sensor();
 
   // センサの情報を返す
-  void getSensorData( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real );
+  void get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real );
 
   // リファレンス値をセットする
   void setConstant( Sensor_Data *data, int reference, int threshold, int dir );

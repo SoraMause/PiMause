@@ -11,7 +11,7 @@
 #include "Led.h"
 #include "Buzzer.h"
 #include "Motor.h"
-
+#include "Sensor.h"
 
 using namespace std;
 
@@ -52,6 +52,17 @@ int main()
     }
     
   }
+
+  Sensor_Data front;
+  Sensor_Data left;
+  Sensor_Data right;
+  ExistWall exist;
+
+  Sensor *sensor = new Sensor();
+
+  sensor->get( &front, &left, &right, &exist );
+
+  cout << front.now << "," << left.now << "," << right.now << endl;
 
   return 0;
 }

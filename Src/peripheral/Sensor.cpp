@@ -35,7 +35,7 @@ Sensor::~Sensor()
  * @return なし
  * @detail センサ関連の処理をしたのち、センサのデータを返す。
 */
-void Sensor::getSensorData( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real )
+void Sensor::get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real )
 {
   update();
   *front = sen_front;
