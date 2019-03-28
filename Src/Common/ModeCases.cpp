@@ -55,13 +55,13 @@ void ModeCases::init()
  * @brief センサ値をチェック
  * @param なし
  * @return　なし
- * @detail スイッチ2が押されたら終了
+ * @detail スイッチ1が押されたら終了
 */
 void ModeCases::checkSensor()
 {
-  bool sw2 = false;
-  while( !( sw2 == sw->get2() ) ){
+  while( 1 ){
     sensor->show();
+    if ( sw->get1() ) break;
   }
 }
 

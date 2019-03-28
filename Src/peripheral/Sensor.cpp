@@ -98,7 +98,7 @@ void Sensor::show()
   std::fscanf( data, "%d %d %d %d", &fr, &r, &l, &fl );
   std::fclose( data );
 
-  std::printf( "%d, %d, %d, %d \r",fl, l, r, fr );
+  std::printf( "%d, %d, %d, %d \r\n",fl, l, r, fr );
 }
 
 /**
