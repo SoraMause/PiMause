@@ -6,7 +6,7 @@
 #include "Buzzer.h"
 #include "Motor.h"
 #include "Switch.h"
-#include "maze.h"
+#include "Maze.h"
 
 class ModeCases {
 private:
