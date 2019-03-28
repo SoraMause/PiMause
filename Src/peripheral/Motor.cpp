@@ -10,6 +10,8 @@
 
 #include <cstdio>
 
+Motor* Motor::instance = nullptr;
+
 /**
  * @brief モータークラスのコンストラクタ
  * @param なし
@@ -28,7 +30,22 @@ Motor::Motor()
 Motor::~Motor()
 {
   off();
+  delete instance;
 }
+
+/**
+ * @brief モータークラスのインスタンスを得る
+ * @param なし
+ * @return　モータークラスのインスタンス
+*/
+Motor* Motor::getInstance()
+{
+  if ( instance == nullptr ){
+    instance = new Motor();
+  }
+  return instance;
+}
+
 
 /**
  * @brief ソフトウェアスイッチのオンオフ

@@ -9,11 +9,17 @@
 
 class Switch
 {
+private:
+  static Switch* instance;
+
 public:
   // コンストラクタ
   Switch();
   // デストラクタ
   ~Switch();
+
+  // インスタンスを得る
+  static Switch* getInstance();
 
   // sw0
   bool get0();

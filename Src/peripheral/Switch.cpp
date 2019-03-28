@@ -8,6 +8,8 @@
 
 #include <cstdio>
 
+Switch* Switch::instance = nullptr;
+
 /**
  * @brief スイッチクラスのコンストラクタ
  * @param なし
@@ -24,6 +26,20 @@ Switch::Switch()
 */
 Switch::~Switch()
 {
+  delete instance;
+}
+
+/**
+ * @brief スイッチクラスのインスタンスを得る
+ * @param なし
+ * @return　スイッチクラスのインスタンス
+*/
+Switch* Switch::getInstance()
+{
+  if ( instance == nullptr ){
+    instance = new Switch();
+  }
+  return instance;
 }
 
 /**

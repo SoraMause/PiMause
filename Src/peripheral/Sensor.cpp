@@ -8,6 +8,8 @@
 
 #include <cstdio>
 
+Sensor* Sensor::instance = nullptr;
+
 /**
  * @brief センサークラスのコンストラクタ
  * @param なし
@@ -24,6 +26,20 @@ Sensor::Sensor()
 */
 Sensor::~Sensor()
 {
+  delete instance;
+}
+
+/**
+ * @brief センサクラスのインスタンスを得る
+ * @param なし
+ * @return　センサクラスのインスタンス
+*/
+Sensor* Sensor::getInstance()
+{
+  if ( instance == nullptr ){
+    instance = new Sensor();
+  }
+  return instance;
 }
 
 /**

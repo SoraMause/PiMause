@@ -23,6 +23,8 @@ struct Sensor_Data
 
 class Sensor{
 private:
+  static Sensor* instance;
+
   ExistWall exist;
   Sensor_Data sen_front;
   Sensor_Data sen_left;
@@ -34,6 +36,9 @@ public:
 
   // センサークラスのデストラクタ
   ~Sensor();
+
+  // インスタンスを得る
+  static Sensor* getInstance();
 
   // センサの情報を返す
   void get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real );

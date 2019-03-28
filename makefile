@@ -8,6 +8,7 @@ endif
 LIBS      =
 INCLUDE   = -I./Inc/peripheral \
 						-I./Inc/Maze \
+						-I./Inc/Common \
 						-I./Inc
 
 TARGET    = ./build/$(shell basename `readlink -f .`)
@@ -15,7 +16,9 @@ TARGET    = ./build/$(shell basename `readlink -f .`)
 SOURCES   = main.cpp \
 $(wildcard Src/peripheral/*.cpp) \
 $(wildcard Src/Maze/*.cpp) \
-$(wildcard Src/*.cpp)
+$(wildcard Src/Common/*.cpp) \
+$(wildcard Src/*.cpp) 
+
 
 
 OBJDIR    = ./build

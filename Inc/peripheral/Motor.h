@@ -9,14 +9,19 @@
 
 class Motor {
 private:
-  // 現在のステータス
-  bool status = false;
+  static Motor* instance;
+  
+  bool status = false; // 現在のステータス
+  
 public:
   // コンストラクタ
   Motor();
 
   //デストラクタ
   ~Motor();
+
+  // インスタンスを得る
+  static Motor* getInstance();
 
   // ソフトウェアスイッチをオンオフする
   void setSoftwareSwitch( bool sw );

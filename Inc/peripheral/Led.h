@@ -8,6 +8,8 @@
 #define __LED__H
 
 class Led{
+private:
+  static Led* instance;
 
 public:
   // コンストラクタ
@@ -15,6 +17,9 @@ public:
 
   // デストラクタ
   ~Led();
+
+  // インスタンスを得る
+  static Led* getInstance();
 
   // ledを光らせる関数
   void illuminate( int led );

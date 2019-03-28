@@ -9,6 +9,7 @@
 
 class Buzzer{
 private:
+  static Buzzer* instance;
 
 public:
   // 音の周波数の列挙
@@ -31,6 +32,9 @@ public:
 
   // デストラクタ
   ~Buzzer();
+
+  // インスタンスを取得する
+  static Buzzer* getInstance();
 
   void on( const char *scale, int wait_time );
 

@@ -9,6 +9,8 @@
 #include <cstdio>
 #include <unistd.h>
 
+Buzzer* Buzzer::instance = nullptr;
+
 /**
  * @brief ブザークラスのコンストラクタ
  * @param なし
@@ -26,7 +28,20 @@ Buzzer::Buzzer()
 */
 Buzzer::~Buzzer()
 {
+  delete instance;
+}
 
+/**
+ * @brief ブザークラスのインスタンスを得る
+ * @param なし
+ * @return　ブザークラスのインスタンス
+*/
+Buzzer* Buzzer::getInstance()
+{
+  if ( instance == nullptr ){
+    instance = new Buzzer();
+  }
+  return instance;
 }
 
 /**

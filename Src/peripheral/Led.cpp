@@ -8,6 +8,8 @@
 
 #include "Led.h"
 
+Led* Led::instance = nullptr;
+
 /**
  * @brief LEDクラスのコンストラクタ
  * @param なし
@@ -24,6 +26,21 @@ Led::Led()
 */
 Led::~Led()
 {
+  illuminate( 0x00 );
+  delete instance;
+}
+
+/**
+ * @brief LEDクラスのインスタンスを得る
+ * @param なし
+ * @return　LEDクラスのインスタンス
+*/
+Led* Led::getInstance()
+{
+  if ( instance == nullptr ){
+    instance = new Led();
+  }
+  return instance;
 }
 
 /**

@@ -7,62 +7,20 @@
 #include <iostream>
 #include <unistd.h>
 
-#include "Switch.h"
-#include "Led.h"
-#include "Buzzer.h"
-#include "Motor.h"
-#include "Sensor.h"
+#include "MauseSystem.h"
+#include "Mode.h"
 
 using namespace std;
 
 int main()
 {
+  MauseSystem *mause = new MauseSystem();
 
-  cout << "checkPushSw" << endl;
+  mause->peripheral_init();
 
-  Switch *sw = new Switch();
-  Led *led = new Led();
-  Buzzer *buzzer = new Buzzer();
+  Mode *mode = new Mode();
 
-  bool sw0,sw1,sw2;
-  int mode_count = 0;
-
-  while( 1 ){
-    sw0 = sw->get0();
-    sw1 = sw->get1();
-    sw2 = sw->get2();
-
-    if ( sw0 ){
-      mode_count++;
-      if ( mode_count > 15 ) mode_count = 0;
-      led->illuminate( mode_count );
-      buzzer->on( A, 300 );
-    }
-
-    if ( sw1 ){
-      mode_count--;
-      if ( mode_count < 0 ) mode_count = 15;
-      led->illuminate( mode_count );
-      buzzer->on( C, 300 );
-    }
-
-    if ( sw2 ) {
-      led->illuminate( 0x00 );
-      break;
-    }
-    
-  }
-
-  Sensor_Data front;
-  Sensor_Data left;
-  Sensor_Data right;
-  ExistWall exist;
-
-  Sensor *sensor = new Sensor();
-
-  sensor->get( &front, &left, &right, &exist );
-
-  cout << front.now << "," << left.now << "," << right.now << endl;
-
+  mode->select();
+  
   return 0;
 }
