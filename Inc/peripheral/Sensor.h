@@ -7,7 +7,7 @@
 #ifndef __SENSOR__H
 #define __SENSOR__H
 
-#include "map.h"
+#include "Map.h"
 
 struct Sensor_Data
 {
