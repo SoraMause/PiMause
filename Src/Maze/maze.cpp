@@ -4,11 +4,13 @@
  * @date 2019 3.13 
 */
 
-#include "maze.h"
+#include "Maze.h"
 #include <cstdio>
 #include <queue>
 #include <utility>
 #include "mazeConf.h"
+
+Maze* Maze::instance = nullptr;
 
 /**
  * @override Maze
@@ -46,7 +48,30 @@ Maze::Maze( uint8_t _gx, uint8_t _gy )
 */
 Maze::~Maze()
 {
+  delete map;
+}
 
+/**
+ * @brief 迷路のインスタンスを得る
+ * @param なし
+ * @return　迷路クラスのインスタンス
+*/
+Maze* Maze::getInstance()
+{
+  if ( instance == nullptr ){
+    instance = new Maze();
+  }
+  return instance;
+}
+
+/**
+ * @brief マップを初期化する
+ * @param なし
+ * @return なし
+*/
+void Maze::resetMap()
+{
+  map->init();
 }
 
 /**

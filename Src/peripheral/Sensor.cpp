@@ -85,6 +85,22 @@ void Sensor::setConstant( Sensor_Data *data, int reference, int threshold, int d
   }
 }
 
+void Sensor::show()
+{
+  std::FILE *data;
+
+  int fr = 0;
+  int r = 0;
+  int l = 0;
+  int fl = 0;
+
+  data = std::fopen("/dev/rtlightsensor0", "r" );
+  std::fscanf( data, "%d %d %d %d", &fr, &r, &l, &fl );
+  std::fclose( data );
+
+  std::printf( "%d, %d, %d, %d \r",fl, l, r, fr );
+}
+
 /**
  * @brief センサーの情報を更新する
  * @param なし

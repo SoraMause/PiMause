@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 #include "mazeConf.h"
-#include "map.h"
+#include "Map.h"
 
 struct Position
 {
@@ -27,6 +27,7 @@ public:
 
 class Maze {
 private:
+  static Maze* instance;
   #define MAX_STEP 0xffff
   Map *map;
   uint8_t gx = 0;
@@ -43,6 +44,9 @@ public:
   // デストラクタ
   ~Maze();
 
+  // インスタンスを得る
+  static Maze* getInstance();
+
   // ゴール座標をセットする
   void setGoal( uint8_t _gx, uint8_t _gy );
 
@@ -57,6 +61,9 @@ public:
   {
     start = _flag;
   }
+
+  // マップをリセットする
+  void resetMap();
   
 private:
   // 歩数マップを更新

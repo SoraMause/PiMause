@@ -46,6 +46,9 @@ public:
   // リファレンス値をセットする
   void setConstant( Sensor_Data *data, int reference, int threshold, int dir );
 
+  // センサ値を表示
+  void show();
+
 private:
   // センサの処理を更新
   void update();

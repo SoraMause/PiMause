@@ -37,6 +37,7 @@ void MauseSystem::peripheral_init()
   led = Led::getInstance();
   sw = Switch::getInstance();
   sensor = Sensor::getInstance();
+  motor = Motor::getInstance();
 
   led->illuminate( 0x0f );
   buzzer->on( C, 300 );

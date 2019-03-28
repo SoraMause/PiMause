@@ -13,7 +13,8 @@
 */
 Mode::Mode()
 {
-
+  cases = new ModeCases();
+  cases->init();
 }
 
 /**
@@ -23,7 +24,7 @@ Mode::Mode()
 */
 Mode::~Mode()
 {
-
+  delete cases;
 }
 
 /**
@@ -81,8 +82,54 @@ void Mode::select()
 
     if ( sw2 ) {
       led->illuminate( 0x00 );
+      buzzer->on( B, 300 );
       break;
     }
-    
+  }
+
+  transition( mode_count );
+
+}
+
+/**
+ * @brief モード遷移をする
+ * @param int mode_number モードの番号
+ * @return　なし
+*/
+void Mode::transition( int mode_number )
+{
+
+  switch( mode_number ){
+    case 0:
+      cases->checkMaze();
+      break;
+
+    case 1:
+      cases->checkSensor();
+      break;
+
+    case 2:
+      break;
+
+    case 3:
+      break;
+
+    case 4:
+      break;
+
+    case 5:
+      break;
+
+    case 6:
+      break;
+
+    case 7:
+      break;
+
+    case 8:
+      break;
+
+    default:
+      break;
   }
 }

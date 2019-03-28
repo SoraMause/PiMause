@@ -20,6 +20,7 @@ private:
   Led *led;
   Switch *sw;
   Sensor *sensor;
+  Motor *motor;
 
 public:
   // コンストラクタ

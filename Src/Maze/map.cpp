@@ -4,7 +4,7 @@
  * @date 2019 3.13 
 */
 
-#include "map.h"
+#include "Map.h"
 
 /**
  * @brief マップクラスのコンストラクタ
