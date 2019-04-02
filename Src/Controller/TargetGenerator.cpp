@@ -62,3 +62,13 @@ void TargetGenerator::calcStepFrequency()
 
   step_vel = int(frequency);
 }
+
+/**
+ * @brief センサの情報からフィードバック用ステップ周波数を計算する
+ * @param なし
+ * @return　なし
+*/
+void TargetGenerator::clacSensorP( Sensor_Data *sen_front, Sensor_Data *sen_left, Sensor_Data *sen_roght, bool rotation )
+{
+  step_sensor = 0;
+}

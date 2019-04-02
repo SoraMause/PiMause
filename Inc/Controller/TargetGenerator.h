@@ -8,6 +8,8 @@
 
 #include "Trapezoid.h"
 
+#include "Sensor.h"
+
 class TargetGenerator
 {
 private:
@@ -30,12 +32,11 @@ public:
   // ステップ周波数を返す
   void getStepFrequency( int *left, int *right, bool back_right );
 
-private:
   // 速度からステップ周波数の目標値を計算する
   void calcStepFrequency();
 
   // センサの値からフィードバックする
-  
+  void clacSensorP( Sensor_Data *sen_front, Sensor_Data *sen_left, Sensor_Data *sen_roght, bool rotation );
 };
 
 

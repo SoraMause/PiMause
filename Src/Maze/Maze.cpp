@@ -98,7 +98,7 @@ uint8_t Maze::getNextAction( Position *pos, ExistWall *exist )
 {
   uint8_t next = Front;
   if ( start ){
-    updatePosition( pos, 0 );
+    updatePosition( pos, next );
     start = false;
   } else {
     map->addWall( pos->x, pos-> y, exist, pos->direction );
