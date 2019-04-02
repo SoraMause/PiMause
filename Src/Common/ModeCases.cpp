@@ -117,6 +117,8 @@ void ModeCases::checkStepFrequency()
     trans_target->calcStepFrequency( velocity );
     trans_target->getStepFrequency( &left, &right, false );
     std::printf("%5.5f, %d, %d\r\n", velocity, left, right );
+    left = 0;
+    right = 0;
   }
 
   delete trans_target;
