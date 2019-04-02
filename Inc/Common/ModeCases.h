@@ -38,6 +38,9 @@ public:
   // 台形加速のチェック
   void checkTrape();
 
+  // 台形加速の周波数のチェック
+  void checkStepFrequency();
+
 private:
 };
 

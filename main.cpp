@@ -16,13 +16,12 @@ using namespace std;
 
 int main()
 {
-  #if 0
+ 
   MauseSystem *mause = new MauseSystem();
   mause->peripheral_init();
 
   Mode *mode = new Mode();
   mode->select();
-  #endif
-  
+ 
   return 0;
 }

@@ -3,6 +3,8 @@
 #include <cstdio>
 #include <unistd.h>
 
+#include "TargetGenerator.h"
+
 /**
  * @brief モードケースクラスのコンストラクタ
  * @param なし
@@ -90,10 +92,32 @@ void ModeCases::checkTrape()
 {
   float vel = 0.0f;
 
-  trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f );
+  trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f );
 
   while( trape->status() == false ){
     vel = trape->getNextVelocity();
     std::printf( "%f\n", vel );
   }
+}
+
+void ModeCases::checkStepFrequency()
+{
+  float velocity = 0.0f;
+  int left = 0;
+  int right = 0;
+
+  TargetGenerator *trans_target = new TargetGenerator();
+
+  trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f );
+
+  std::printf("velocity ,left, right \r\n");
+
+  while( trape->status() == false ){
+    velocity = trape->getNextVelocity();
+    trans_target->calcStepFrequency( velocity );
+    trans_target->getStepFrequency( &left, &right, false );
+    std::printf("%5.5f, %d, %d\r\n", velocity, left, right );
+  }
+
+  delete trans_target;
 }

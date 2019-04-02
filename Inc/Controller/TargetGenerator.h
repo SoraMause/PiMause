@@ -33,7 +33,7 @@ public:
   void getStepFrequency( int *left, int *right, bool back_right );
 
   // 速度からステップ周波数の目標値を計算する
-  void calcStepFrequency();
+  void calcStepFrequency( float velocity );
 
   // センサの値からフィードバックする
   void clacSensorP( Sensor_Data *sen_front, Sensor_Data *sen_left, Sensor_Data *sen_roght, bool rotation );

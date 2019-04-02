@@ -41,7 +41,6 @@ void TargetGenerator::getStepFrequency( int *left, int *right, bool back_right )
     *left += step_vel;
     *right += step_vel + step_sensor;
   }
-
 }
 
 /**
@@ -49,12 +48,9 @@ void TargetGenerator::getStepFrequency( int *left, int *right, bool back_right )
  * @param なし
  * @return　なし
 */
-void TargetGenerator::calcStepFrequency()
+void TargetGenerator::calcStepFrequency( float velocity )
 {
-  float velocity = 0.0f;
   float frequency = 0.0f;
-
-  velocity = trape->getNextVelocity();
 
   // v_step[step/sec] = v[mm/s] / d[mm/step]
   // v_step パルス周波数

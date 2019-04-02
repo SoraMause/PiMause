@@ -68,14 +68,14 @@ void Mode::select()
 
     if ( sw0 ){
       mode_count++;
-      if ( mode_count > 15 ) mode_count = 0;
+      if ( mode_count > 8 ) mode_count = 0;
       led->illuminate( mode_count );
       buzzer->on( A, 300 );
     }
 
     if ( sw1 ){
       mode_count--;
-      if ( mode_count < 0 ) mode_count = 15;
+      if ( mode_count < 0 ) mode_count = 8;
       led->illuminate( mode_count );
       buzzer->on( C, 300 );
     }
@@ -109,9 +109,11 @@ void Mode::transition( int mode_number )
       break;
 
     case 2:
+      cases->checkTrape();
       break;
 
     case 3:
+      cases->checkStepFrequency();
       break;
 
     case 4:
