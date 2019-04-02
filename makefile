@@ -9,6 +9,7 @@ LIBS      =
 INCLUDE   = -I./Inc/peripheral \
 						-I./Inc/Maze \
 						-I./Inc/Common \
+						-I./Inc/Controller \
 						-I./Inc
 
 TARGET    = ./build/$(shell basename `readlink -f .`)
@@ -17,6 +18,7 @@ SOURCES   = main.cpp \
 $(wildcard Src/peripheral/*.cpp) \
 $(wildcard Src/Maze/*.cpp) \
 $(wildcard Src/Common/*.cpp) \
+$(wildcard Src/Controller/*.cpp) \
 $(wildcard Src/*.cpp) 
 
 

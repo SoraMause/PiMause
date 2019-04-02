@@ -48,7 +48,11 @@ void ModeCases::init()
 
   if ( maze == nullptr ){
     maze = Maze::getInstance();
-  }  
+  } 
+
+  if ( trape == nullptr ){
+    trape = Trapezoid::getInstance();
+  } 
 }
 
 /**
@@ -75,4 +79,21 @@ void ModeCases::checkMaze()
   Position pos;
   pos.init();
   maze->show( pos );
+}
+
+/**
+ * @brief 台形加速をチェック
+ * @param なし
+ * @return　なし
+*/
+void ModeCases::checkTrape()
+{
+  float vel = 0.0f;
+
+  trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f );
+
+  while( trape->status() == false ){
+    vel = trape->getNextVelocity();
+    std::printf( "%f\n", vel );
+  }
 }

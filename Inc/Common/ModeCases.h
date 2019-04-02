@@ -8,6 +8,8 @@
 #include "Switch.h"
 #include "Maze.h"
 
+#include "Trapezoid.h"
+
 class ModeCases {
 private:
   Led *led = nullptr;
@@ -15,6 +17,7 @@ private:
   Motor *motor = nullptr;
   Switch *sw = nullptr;
   Maze *maze = nullptr;
+  Trapezoid *trape = nullptr;
 
 public:
   // コンストラクタ
@@ -31,6 +34,9 @@ public:
 
   // 迷路情報のチェック
   void checkMaze();
+
+  // 台形加速のチェック
+  void checkTrape();
 
 private:
 };
