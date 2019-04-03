@@ -12,6 +12,7 @@
 #include "Buzzer.h"
 #include "Motor.h"
 #include "Sensor.h"
+#include "Interrupt.h"
 
 class MauseSystem
 {
@@ -21,6 +22,7 @@ private:
   Switch *sw;
   Sensor *sensor;
   Motor *motor;
+  Interrupt *interrupt;
 
 public:
   // コンストラクタ

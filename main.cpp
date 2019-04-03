@@ -10,8 +10,6 @@
 #include "MauseSystem.h"
 #include "Mode.h"
 
-#include "Trapezoid.h"
-
 using namespace std;
 
 int main()
@@ -20,8 +18,11 @@ int main()
   MauseSystem *mause = new MauseSystem();
   mause->peripheral_init();
 
+  Interrupt *interrupt = Interrupt::getInstance();
+  interrupt->run();
+
   Mode *mode = new Mode();
-  mode->select();
- 
+  mode->run();
+  
   return 0;
 }

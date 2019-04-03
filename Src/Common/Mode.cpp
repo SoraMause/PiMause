@@ -6,6 +6,8 @@
 
 #include "Mode.h"
 
+#include <thread>
+
 /**
  * @brief モードクラスのコンストラクタ
  * @param なし
@@ -134,4 +136,15 @@ void Mode::transition( int mode_number )
     default:
       break;
   }
+}
+
+/**
+ * @brief モードセレクトのスレッドを実行する
+ * @param なし
+ * @return　なし
+*/
+void Mode::run()
+{
+  std::thread mode_th( [this]() { this->select();} );
+  mode_th.join();
 }
