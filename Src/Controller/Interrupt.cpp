@@ -7,6 +7,7 @@
 
 #include <thread>
 #include <iostream>
+#include <unistd.h>
 
 Interrupt* Interrupt::instance = nullptr;
 
@@ -58,6 +59,7 @@ void Interrupt::processing()
 {
   while( 1 ){
     std::cout << "割り込み処理読んだ？" << std::endl;
+    usleep( 1000 );
   }
 }
 
