@@ -6,7 +6,7 @@ ControlThread::ControlThread()
 {
   mode = new Mode();
 
-  interrupt = new Interrupt();
+  interrupt = Interrupt::getInstance();
 }
 
 void ControlThread::run()

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <unistd.h>
 
+Interrupt* Interrupt::instance = nullptr;
 
 /**
  * @brief 割り込みクラスのコンストラクタ
@@ -37,6 +38,19 @@ Interrupt::~Interrupt()
 }
 
 /**
+ * @brief interruptクラスのインスタンスを得る
+ * @param なし
+ * @return　interruptクラスのインスタンス
+*/
+Interrupt* Interrupt::getInstance()
+{
+  if ( instance == nullptr ){
+    instance = new Interrupt();
+  }
+  return instance;
+}
+
+/**
  * @brief 割り込みの処理を行う
  * @param なし
  * @return　なし
@@ -56,7 +70,7 @@ void Interrupt::processing()
 */
 void Interrupt::setSensor( bool flag )
 {
-  sensor = flag;
+  sensor_light = flag;
 }
 
 /**
