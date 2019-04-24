@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 #include "MauseSystem.h"
-#include "controlThread.h"
+#include "ControlThread.h"
 
 using namespace std;
 

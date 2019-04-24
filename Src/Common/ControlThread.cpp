@@ -1,4 +1,4 @@
-#include "controlThread.h"
+#include "ControlThread.h"
 
 #include <thread>
 
