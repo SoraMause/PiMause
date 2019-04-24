@@ -91,5 +91,5 @@ void Interrupt::setControl( bool flag )
 void Interrupt::run()
 {
   std::thread interrupt_th( [this]() { this->processing();} );
-  interrupt_th.join();
+  interrupt_th.detach();
 }

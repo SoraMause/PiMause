@@ -150,5 +150,5 @@ void Mode::transition( int mode_number )
 void Mode::run()
 {
   std::thread mode_th( [this]() { this->select();} );
-  mode_th.join();
+  mode_th.detach();
 }
