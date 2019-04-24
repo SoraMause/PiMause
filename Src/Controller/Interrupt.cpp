@@ -9,7 +9,6 @@
 #include <iostream>
 #include <unistd.h>
 
-Interrupt* Interrupt::instance = nullptr;
 
 /**
  * @brief 割り込みクラスのコンストラクタ
@@ -38,19 +37,6 @@ Interrupt::~Interrupt()
 }
 
 /**
- * @brief ブザークラスのインスタンスを得る
- * @param なし
- * @return　ブザークラスのインスタンス
-*/
-Interrupt* Interrupt::getInstance()
-{
-  if ( instance == nullptr ){
-    instance = new Interrupt();
-  }
-  return instance;
-}
-
-/**
  * @brief 割り込みの処理を行う
  * @param なし
  * @return　なし
@@ -59,7 +45,7 @@ void Interrupt::processing()
 {
   while( 1 ){
     std::cout << "割り込み処理読んだ？" << std::endl;
-    usleep( 1000 );
+    usleep( 1000000 );
   }
 }
 
@@ -83,13 +69,3 @@ void Interrupt::setControl( bool flag )
   control = flag;
 }
 
-/**
- * @brief 割り込み処理のスレッドを実行する
- * @param なし
- * @return　なし
-*/
-void Interrupt::run()
-{
-  std::thread interrupt_th( [this]() { this->processing();} );
-  interrupt_th.detach();
-}

@@ -29,9 +29,6 @@ public:
   // モードセレクト
   void select();
 
-  // スレッドを実行
-  void run();
-
 
 private:
   // 初期化

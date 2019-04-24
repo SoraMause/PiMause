@@ -142,13 +142,3 @@ void Mode::transition( int mode_number )
   }
 }
 
-/**
- * @brief モードセレクトのスレッドを実行する
- * @param なし
- * @return　なし
-*/
-void Mode::run()
-{
-  std::thread mode_th( [this]() { this->select();} );
-  mode_th.detach();
-}

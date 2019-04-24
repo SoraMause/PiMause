@@ -12,7 +12,6 @@
 class Interrupt
 {
 private:
-  static Interrupt *instance;
 
   Trapezoid *trape = nullptr;
   TargetGenerator *target_trans = nullptr;
@@ -27,9 +26,6 @@ public:
   // 割り込みクラスのデストラクタ
   ~Interrupt();
 
-  // インスタンスを得る
-  static Interrupt* getInstance();
-
   // 処理を行う
   void processing();
 
@@ -38,9 +34,6 @@ public:
 
   // コントロールのフラグをセットする
   void setControl( bool flag );
-
-  // スレッドを実行する
-  void run();
 
 };
 

@@ -22,7 +22,6 @@ private:
   Switch *sw;
   Sensor *sensor;
   Motor *motor;
-  Interrupt *interrupt;
 
 public:
   // コンストラクタ

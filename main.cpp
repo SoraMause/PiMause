@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 #include "MauseSystem.h"
-#include "Mode.h"
+#include "controlThread.h"
 
 using namespace std;
 
@@ -18,11 +18,9 @@ int main()
   MauseSystem *mause = new MauseSystem();
   mause->peripheral_init();
 
-  Interrupt *interrupt = Interrupt::getInstance();
-  interrupt->run();
+  ControlThread control;
 
-  Mode *mode = new Mode();
-  mode->run();
+  control.run();
   
   return 0;
 }
