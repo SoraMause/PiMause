@@ -7,6 +7,7 @@
 #include "Mode.h"
 
 #include <thread>
+#include <iostream>
 
 /**
  * @brief モードクラスのコンストラクタ
@@ -64,32 +65,35 @@ void Mode::select()
   int mode_count = 0;
 
   while( 1 ){
-    sw0 = sw->get0();
-    sw1 = sw->get1();
-    sw2 = sw->get2();
+    while( 1 ){
+      std::cout << "モード選択読んだ？" << std::endl;
+      sw0 = sw->get0();
+      sw1 = sw->get1();
+      sw2 = sw->get2();
 
-    if ( sw0 ){
-      mode_count++;
-      if ( mode_count > 8 ) mode_count = 0;
-      led->illuminate( mode_count );
-      buzzer->on( A, 300 );
+      if ( sw0 ){
+        mode_count++;
+        if ( mode_count > 8 ) mode_count = 0;
+        led->illuminate( mode_count );
+        buzzer->on( A, 300 );
+      }
+
+      if ( sw1 ){
+        mode_count--;
+        if ( mode_count < 0 ) mode_count = 8;
+        led->illuminate( mode_count );
+        buzzer->on( C, 300 );
+      }
+
+      if ( sw2 ) {
+        led->illuminate( 0x00 );
+        buzzer->on( B, 300 );
+        break;
+      }
     }
 
-    if ( sw1 ){
-      mode_count--;
-      if ( mode_count < 0 ) mode_count = 8;
-      led->illuminate( mode_count );
-      buzzer->on( C, 300 );
-    }
-
-    if ( sw2 ) {
-      led->illuminate( 0x00 );
-      buzzer->on( B, 300 );
-      break;
-    }
+    transition( mode_count );
   }
-
-  transition( mode_count );
 
 }
 
