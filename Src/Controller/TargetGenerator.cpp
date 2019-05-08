@@ -38,7 +38,7 @@ void TargetGenerator::getStepFrequency( int *left, int *right, bool back_right )
     *left += -1 * (step_vel - step_sensor);
     *right += -1 * (step_vel + step_sensor);
   } else {
-    *left += step_vel;
+    *left += step_vel - step_sensor;
     *right += step_vel + step_sensor;
   }
 }
