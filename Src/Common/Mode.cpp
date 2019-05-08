@@ -65,7 +65,6 @@ void Mode::select()
 
   while( 1 ){
     while( 1 ){
-      std::cout << "モード選択読んだ？" << std::endl;
       sw0 = sw->get0();
       sw1 = sw->get1();
       sw2 = sw->get2();
@@ -122,6 +121,7 @@ void Mode::transition( int mode_number )
       break;
 
     case 4:
+      cases->moveTrapezoid();
       break;
 
     case 5:
