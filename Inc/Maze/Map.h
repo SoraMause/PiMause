@@ -1,14 +1,15 @@
 /**
  * map.h
  * @author yuta seya
- * @date 2019 3.13 
+ * @date 2019 3.13
 */
 
-#ifndef __MAP__H
-#define __MAP__H
+#ifndef MAP_H
+#define MAP_H
+
 
 #include <stdint.h>
-#include "mazeConf.h"
+#include "mazeconf.h"
 
 struct ExistWall
 {
@@ -22,10 +23,12 @@ class Map
 
 private:
   // 壁情報をもつ構造体
-  struct WallData 
+  struct WallData
   {
     uint16_t vertical[17];
     uint16_t horizontal[17];
+    uint16_t vertical_known[17];
+    uint16_t horizontal_knwon[17];
   };
 
   WallData wall;
@@ -43,8 +46,17 @@ public:
   // 壁情報の追加
   void addWall( uint8_t x, uint8_t y, ExistWall *exist, uint8_t direction );
 
+  // 壁情報の追加
+  void addWall(uint8_t x, uint8_t y, bool n, bool w, bool s, bool e );
+
   // 壁情報を読み出す
   bool getData( uint8_t x, uint8_t y, uint8_t direction );
+
+  // 壁情報を読み込む
+  void getWallData( ExistWall *exist );
+
+  // 探索したかどうかを確認
+  bool checkWall( uint8_t x, uint8_t y );
 
 private:
   // 東西南北の壁の追加、削除
@@ -55,7 +67,6 @@ private:
   void manegeWestWall( uint8_t x, uint8_t y, bool exist );
 
   void manegeEastWall( uint8_t x, uint8_t y, bool exist );
-  
-};
 
-#endif /* __MAP__H */
+};
+#endif // MAP_H

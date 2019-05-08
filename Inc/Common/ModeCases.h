@@ -1,3 +1,9 @@
+/**
+ * ModeCases.h
+ * @author yuta seya
+ * @date 2019 4.2
+*/
+
 #ifndef __MODE_CASES__H
 #define __MODE_CASES__H
 

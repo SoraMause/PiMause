@@ -55,7 +55,7 @@ void Buzzer::on( const char *scale, int wait_time )
 {
   std::FILE *bz;
   bz = std::fopen( "/dev/rtbuzzer0", "w" );
-  std::fprintf( bz, scale );
+  std::fprintf( bz, "%s",scale );
   std::fclose( bz );
   usleep( wait_time * 1000 );
   off();

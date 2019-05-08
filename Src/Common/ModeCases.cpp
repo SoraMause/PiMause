@@ -1,3 +1,9 @@
+/**
+ * ModeCases.cpp
+ * @author yuta seya
+ * @date 2019 4.2
+*/
+
 #include "ModeCases.h"
 
 #include <cstdio>
@@ -100,6 +106,11 @@ void ModeCases::checkTrape()
   }
 }
 
+/**
+ * @brief 台形加速中の周波数が変更されているかチェック
+ * @param なし
+ * @return　なし
+*/
 void ModeCases::checkStepFrequency()
 {
   float velocity = 0.0f;

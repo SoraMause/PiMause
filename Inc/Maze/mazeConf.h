@@ -1,10 +1,11 @@
 /**
- * mazeConf.h
+ * mazeconf.h
  * @author yuta seya
- * @date 2019 3.13 
+ * @date 2019 3.13
 */
-#ifndef __MAZE_CONF__H
-#define __MAZE_CONF__H
+
+#ifndef MAZECONF_H
+#define MAZECONF_H
 
 #include <stdint.h>
 
@@ -22,5 +23,4 @@ typedef enum {
   East,
 }Direction;
 
-
-#endif /* __MAZE_CONF__H */
+#endif // MAZECONF_H
