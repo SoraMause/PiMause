@@ -8,7 +8,7 @@
 #define MAZE_H
 
 #include <stdint.h>
-#include "mazeconf.h"
+#include "mazeConf.h"
 #include "map.h"
 
 struct Position

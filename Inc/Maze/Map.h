@@ -9,7 +9,7 @@
 
 
 #include <stdint.h>
-#include "mazeconf.h"
+#include "mazeConf.h"
 
 struct ExistWall
 {
