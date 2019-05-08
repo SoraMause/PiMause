@@ -67,18 +67,20 @@ void Interrupt::processing()
     target_trans->calcStepFrequency( velocity );
     target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
 
-    motor->control( left, right );
+    //motor->control( left, right );
+
+    std::cout << left << right << velocity << std::endl;
 
     processing_end = std::chrono::system_clock::now();
-    
+  
+
     double processing_time = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() );
 
     uint32_t wait_time = (uint32_t)( 3000000 - processing_time );
-    velocity = 0.0f;
-    usleep( wait_time );
-
     left = 0;
     right = 0;
+    velocity = 0.0f;
+    usleep( wait_time );
     
   }
 }

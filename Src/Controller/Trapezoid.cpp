@@ -63,8 +63,7 @@ void Trapezoid::makeTrapezoid( float dis, float acc, float max_vel, float start_
   max_velocity = std::abs(max_vel);
   end_velocity = std::abs(end_vel);
   target_velocity = std::abs(dis);
-  velocity = std::abs( start_vel );
-
+  velocity = start_vel;
 
   if ( acc == 0.0f ){
     // 加速度が0のときは加減速の距離は0
