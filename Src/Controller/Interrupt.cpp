@@ -67,9 +67,9 @@ void Interrupt::processing()
     target_trans->calcStepFrequency( velocity );
     target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
 
-    //motor->control( left, right );
+    motor->control( left, right );
 
-    std::cout << left << right << velocity << std::endl;
+    //std::cout << left << right << velocity << std::endl;
 
     processing_end = std::chrono::system_clock::now();
   
