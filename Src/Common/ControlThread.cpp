@@ -1,3 +1,9 @@
+/**
+ * ControlThread.cpp
+ * @author yuta seya
+ * @date 2019 5.8
+*/
+
 #include "ControlThread.h"
 
 #include <thread>
@@ -15,5 +21,5 @@ void ControlThread::run()
   std::thread interrupt_th( [this]() { interrupt->processing();} );
   
   mode_th.join();
-  interrupt_th.detach();
+  interrupt_th.join();
 }
