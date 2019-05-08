@@ -76,8 +76,8 @@ void Interrupt::processing()
 
     processing_end = std::chrono::system_clock::now();
     
-    uint32_t processing_time = static_cast<uint32_t>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() / 1000.0);
-    uint32_t wait_time = 2000 - processing_time;
+    double processing_time = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() / 1000.0);
+    uint32_t wait_time = uint32_t(2000 - processing_time);
     velocity = 0.0f;
     usleep( wait_time );
     
