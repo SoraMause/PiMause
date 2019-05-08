@@ -6,7 +6,6 @@
 
 #include "Mode.h"
 
-#include <thread>
 #include <iostream>
 
 /**

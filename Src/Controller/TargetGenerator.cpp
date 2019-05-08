@@ -64,7 +64,8 @@ void TargetGenerator::calcStepFrequency( float velocity )
  * @param なし
  * @return　なし
 */
-void TargetGenerator::clacSensorP( Sensor_Data *sen_front, Sensor_Data *sen_left, Sensor_Data *sen_roght, bool rotation )
+int16_t TargetGenerator::clacSensorP( Sensor_Data *sen_front, Sensor_Data *sen_left, Sensor_Data *sen_roght, bool rotation )
 {
   step_sensor = 0;
+  return step_sensor;
 }

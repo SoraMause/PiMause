@@ -134,3 +134,23 @@ void ModeCases::checkStepFrequency()
 
   delete trans_target;
 }
+
+/**
+ * @brief 台形加速でモーターを動作させる
+ * @param なし
+ * @return　なし
+*/
+void ModeCases::moveTrapezoid()
+{
+
+  motor->setSoftwareSwitch( true );
+
+  trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f );
+
+  while( trape->status() == false );
+
+  motor->control( 0, 0 );
+  motor->setSoftwareSwitch( false );
+
+  sleep( 1 );
+}

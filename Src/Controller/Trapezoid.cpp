@@ -4,6 +4,7 @@
  * @date 2019 4.2 
 */
 #include "Trapezoid.h"
+#include <cmath>
 
 Trapezoid* Trapezoid::instance = nullptr;
 
@@ -52,10 +53,18 @@ void Trapezoid::makeTrapezoid( float dis, float acc, float max_vel, float start_
   is_end = false;
   distance = 0.0f;
 
-  accel = acc;
-  max_velocity = max_vel;
-  end_velocity = end_vel;
-  target_velocity = dis;
+  if ( dis < 0.0f ){
+    travel_dir = true;
+  } else {
+    travel_dir = false;
+  }
+  
+  accel = std::abs(acc);
+  max_velocity = std::abs(max_vel);
+  end_velocity = std::abs(end_vel);
+  target_velocity = std::abs(dis);
+  velocity = std::abs( start_vel );
+
 
   if ( acc == 0.0f ){
     // 加速度が0のときは加減速の距離は0
@@ -113,4 +122,15 @@ float Trapezoid::getNextVelocity()
 bool Trapezoid::status()
 {
   return is_end;
+}
+
+/**
+ * @brief 台形加速の進む向きを返す
+ * @param なし
+ * @return　なし
+ * @detail 前 false 後ろ true
+*/
+bool Trapezoid::travelDirection()
+{
+  return travel_dir;
 }

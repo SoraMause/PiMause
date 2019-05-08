@@ -5,7 +5,6 @@
 */
 #include "Interrupt.h"
 
-#include <thread>
 #include <iostream>
 #include <unistd.h>
 
@@ -24,6 +23,10 @@ Interrupt::Interrupt()
 
   if ( target_trans == nullptr ){
     target_trans = new TargetGenerator();
+  }
+
+  if ( motor == nullptr ){
+    motor = Motor::getInstance();
   }
 }
 
@@ -58,8 +61,26 @@ Interrupt* Interrupt::getInstance()
 void Interrupt::processing()
 {
   while( 1 ){
-    std::cout << "割り込み処理読んだ？" << std::endl;
-    usleep( 1000000 );
+    processing_start = std::chrono::system_clock::now();
+    
+    velocity = trape->getNextVelocity();
+    target_trans->calcStepFrequency( velocity );
+    target_trans->getStepFrequency( &left, &right, false );
+
+    if ( trape->travelDirection() ){
+      left = -1 * left;
+      right = -1 * right;
+    }
+
+    motor->control( left, right );
+
+    processing_end = std::chrono::system_clock::now();
+    
+    uint32_t processing_time = static_cast<uint32_t>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() / 1000.0);
+    uint32_t wait_time = 2000000 - processing_time;
+    velocity = 0.0f;
+    usleep( wait_time );
+    
   }
 }
 

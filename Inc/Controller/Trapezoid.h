@@ -28,7 +28,9 @@ private:
   float velocity = 0.0f;  // 速度
   float distance = 0.0f; // 距離
 
-  #define dt 0.001f     // 制御時間
+  bool travel_dir = false;
+
+  #define dt 0.002f     // 制御時間
 
 public:
   // コンストラクタ
@@ -48,6 +50,9 @@ public:
 
   // モーションのステータスを返す
   bool status();
+
+  // 前、後ろを返す
+  bool travelDirection();
 };
 
 #endif /* __TRAPEZOID__H */

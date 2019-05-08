@@ -11,6 +11,9 @@
 #include "Sensor.h"
 #include "Map.h"
 
+#include <chrono>
+#include "Motor.h"
+
 class Interrupt
 {
 private:
@@ -18,9 +21,17 @@ private:
   Trapezoid *trape = nullptr;
   TargetGenerator *target_trans = nullptr;
   Sensor *sensor = nullptr;
+  Motor *motor = nullptr;
 
   bool control = false;
   bool sensor_light = false;
+
+  int left = 0;
+  int right = 0;
+  float velocity = 0.0f;
+  
+  // 時間を計測するための変数
+  std::chrono::system_clock::time_point processing_start, processing_end;
 
 public:
   // 割り込みクラスのコンストラクタ

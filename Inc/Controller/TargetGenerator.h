@@ -36,7 +36,7 @@ public:
   void calcStepFrequency( float velocity );
 
   // センサの値からフィードバックする
-  void clacSensorP( Sensor_Data *sen_front, Sensor_Data *sen_left, Sensor_Data *sen_roght, bool rotation );
+  int16_t clacSensorP( Sensor_Data *sen_front, Sensor_Data *sen_left, Sensor_Data *sen_roght, bool rotation );
 };
 
 

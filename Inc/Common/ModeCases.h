@@ -47,6 +47,9 @@ public:
   // 台形加速の周波数のチェック
   void checkStepFrequency();
 
+  // 台形加速を動作させる
+  void moveTrapezoid();
+
 private:
 };
 
