@@ -9,7 +9,7 @@
 
 #include <stdint.h>
 #include "mazeConf.h"
-#include "map.h"
+#include "Map.h"
 
 struct Position
 {

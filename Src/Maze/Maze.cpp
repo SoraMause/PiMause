@@ -4,11 +4,11 @@
  * @date 2019 3.13
 */
 
-#include "maze.h"
+#include "Maze.h"
 #include <cstdio>
 #include <queue>
 #include <utility>
-#include "mazeconf.h"
+#include "mazeConf.h"
 
 Maze* Maze::instance = nullptr;
 
