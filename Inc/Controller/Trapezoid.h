@@ -30,7 +30,7 @@ private:
 
   bool travel_dir = false;
 
-  #define dt 0.002f     // 制御時間
+  #define dt 0.003f     // 制御時間
 
 public:
   // コンストラクタ
