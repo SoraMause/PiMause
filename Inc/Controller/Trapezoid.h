@@ -34,7 +34,7 @@ private:
   // ターンか直進
   bool turn_flag = false;
 
-  #define dt 0.003f     // 制御時間
+  #define dt 0.004f     // 制御時間
 
 public:
   // コンストラクタ

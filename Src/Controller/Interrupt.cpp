@@ -80,7 +80,7 @@ void Interrupt::processing()
 
     double processing_time = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() );
 
-    uint32_t wait_time = (uint32_t)( 3000 - processing_time );
+    uint32_t wait_time = (uint32_t)( 4000 - processing_time );
     left = 0;
     right = 0;
     velocity = 0.0f;

@@ -57,7 +57,7 @@ Motor* Motor::getInstance()
 void Motor::setSoftwareSwitch( bool sw )
 {
   status = sw;
-  if ( status ){
+  if ( sw == true ){
     on();
   } else {
     off();
@@ -71,9 +71,7 @@ void Motor::setSoftwareSwitch( bool sw )
  * @return なし
 */
 void Motor::control( int left, int right )
-{
-  if ( !status ) on();
-  
+{  
   leftControl( left );
   rightControl( right );
 }
