@@ -143,14 +143,11 @@ void ModeCases::checkStepFrequency()
 void ModeCases::moveTrapezoid()
 {
 
-  motor->setSoftwareSwitch( true );
-
   trape->makeTrapezoid( 180.0f, 1000.0f, 300.0f, 0.0f, 0.0f, false );
 
   while( trape->status() == false );
 
   motor->control( 0, 0 );
-  motor->setSoftwareSwitch( false );
 
   sleep( 1 );
 }
@@ -163,14 +160,11 @@ void ModeCases::moveTrapezoid()
 void ModeCases::moveTrapezoidTurnLeft()
 {
 
-  motor->setSoftwareSwitch( true );
-
   trape->makeTrapezoid( 72.5f, 2000.0f, 300.0f, 0.0f, 0.0f, true );
 
   while( trape->status() == false );
 
   motor->control( 0, 0 );
-  motor->setSoftwareSwitch( false );
 
   sleep( 1 );
 }
@@ -183,14 +177,11 @@ void ModeCases::moveTrapezoidTurnLeft()
 void ModeCases::moveTrapezoidTurnRight()
 {
 
-  motor->setSoftwareSwitch( true );
-
   trape->makeTrapezoid( -72.5f, 2000.0f, 300.0f, 0.0f, 0.0f, true );
 
   while( trape->status() == false );
 
   motor->control( 0, 0 );
-  motor->setSoftwareSwitch( false );
 
   sleep( 1 );
 }
@@ -203,14 +194,11 @@ void ModeCases::moveTrapezoidTurnRight()
 void ModeCases::moveTrapezoidTurn180()
 {
 
-  motor->setSoftwareSwitch( true );
-
   trape->makeTrapezoid( 145.0f, 2000.0f, 300.0f, 0.0f, 0.0f, true );
 
   while( trape->status() == false );
 
   motor->control( 0, 0 );
-  motor->setSoftwareSwitch( false );
 
   sleep( 1 );
 }

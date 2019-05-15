@@ -23,9 +23,6 @@ public:
   // インスタンスを得る
   static Motor* getInstance();
 
-  // ソフトウェアスイッチをオンオフする
-  void setSoftwareSwitch( bool sw );
-
   // モーターのコントロールをする
   void control( int left, int right );
 

@@ -19,7 +19,7 @@ Motor* Motor::instance = nullptr;
 */
 Motor::Motor()
 {
-
+  on();
 }
 
 /**
@@ -44,24 +44,6 @@ Motor* Motor::getInstance()
     instance = new Motor();
   }
   return instance;
-}
-
-
-/**
- * @brief ソフトウェアスイッチのオンオフ
- * @param なし
- * @return なし
- * @detail 現在のソフトウェアスイッチのステータスを更新し、
- *        　ソフトウェアスイッチをステータスに合わせてオンオフを行う 
-*/
-void Motor::setSoftwareSwitch( bool sw )
-{
-  status = sw;
-  if ( sw == true ){
-    on();
-  } else {
-    off();
-  }
 }
 
 /**
