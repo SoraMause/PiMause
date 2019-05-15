@@ -165,7 +165,7 @@ void ModeCases::moveTrapezoidTurn()
 
   motor->setSoftwareSwitch( true );
 
-  trape->makeTrapezoid( 71.9f, 2000.0f, 300.0f, 0.0f, 0.0f, true );
+  trape->makeTrapezoid( 72.5f, 2000.0f, 300.0f, 0.0f, 0.0f, true );
 
   while( trape->status() == false );
 
