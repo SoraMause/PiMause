@@ -28,7 +28,11 @@ private:
   float velocity = 0.0f;  // 速度
   float distance = 0.0f; // 距離
 
+  // 前か後ろ(左か右)
   bool travel_dir = false;
+
+  // ターンか直進
+  bool turn_flag = false;
 
   #define dt 0.003f     // 制御時間
 
@@ -43,7 +47,7 @@ public:
   static Trapezoid* getInstance();
 
   // 台形加速の加速、定速、減速区間を作成する
-  void makeTrapezoid( float dis, float acc, float max_vel, float start_vel, float end_vel );
+  void makeTrapezoid( float dis, float acc, float max_vel, float start_vel, float end_vel, bool turn );
 
   // 次の速度を返す
   float getNextVelocity();
@@ -51,8 +55,11 @@ public:
   // モーションのステータスを返す
   bool status();
 
-  // 前、後ろを返す
+  // 前、後ろ(左・右)を返す
   bool travelDirection();
+
+  // ターンか直進かどうかを返す
+  bool checkTrunOrStraight();
 };
 
 #endif /* __TRAPEZOID__H */

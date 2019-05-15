@@ -98,7 +98,7 @@ void ModeCases::checkTrape()
 {
   float vel = 0.0f;
 
-  trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f );
+  trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
 
   while( trape->status() == false ){
     vel = trape->getNextVelocity();
@@ -119,7 +119,7 @@ void ModeCases::checkStepFrequency()
 
   TargetGenerator *trans_target = new TargetGenerator();
 
-  trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f );
+  trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
 
   std::printf("velocity ,left, right \r\n");
 
@@ -136,7 +136,7 @@ void ModeCases::checkStepFrequency()
 }
 
 /**
- * @brief 台形加速でモーターを動作させる
+ * @brief 台形加速でモーターを動作をさせる
  * @param なし
  * @return　なし
 */
@@ -145,7 +145,27 @@ void ModeCases::moveTrapezoid()
 
   motor->setSoftwareSwitch( true );
 
-  trape->makeTrapezoid( -180.0f, 1000.0f, 300.0f, 0.0f, 0.0f );
+  trape->makeTrapezoid( 180.0f, 1000.0f, 300.0f, 0.0f, 0.0f, false );
+
+  while( trape->status() == false );
+
+  motor->control( 0, 0 );
+  motor->setSoftwareSwitch( false );
+
+  sleep( 1 );
+}
+
+/**
+ * @brief 台形加速で超信知旋回の動作をさせる
+ * @param なし
+ * @return　なし
+*/
+void ModeCases::moveTrapezoidTurn()
+{
+
+  motor->setSoftwareSwitch( true );
+
+  trape->makeTrapezoid( 71.9f, 2000.0f, 300.0f, 0.0f, 0.0f, true );
 
   while( trape->status() == false );
 

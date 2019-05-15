@@ -50,6 +50,9 @@ public:
   // 台形加速を動作させる
   void moveTrapezoid();
 
+  // 左90度ターン
+  void moveTrapezoidTurn();
+
 private:
 };
 

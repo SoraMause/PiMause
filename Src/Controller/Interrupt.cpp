@@ -67,6 +67,10 @@ void Interrupt::processing()
     target_trans->calcStepFrequency( velocity );
     target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
 
+    if ( trape->checkTrunOrStraight() ){
+      left = -1 * left;
+    }
+
     motor->control( left, right );
 
     //std::cout << left << right << velocity << std::endl;

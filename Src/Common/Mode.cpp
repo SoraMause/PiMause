@@ -49,6 +49,8 @@ void Mode::init()
   }
 
   led->illuminate( 0x00 );
+
+  mode_count = 0;
 }
 
 /**
@@ -61,7 +63,6 @@ void Mode::select()
   init();
 
   bool sw0,sw1,sw2;
-  int mode_count = 0;
 
   while( 1 ){
     while( 1 ){
@@ -125,6 +126,7 @@ void Mode::transition( int mode_number )
       break;
 
     case 5:
+      cases->moveTrapezoidTurn();
       break;
 
     case 6:
@@ -139,5 +141,7 @@ void Mode::transition( int mode_number )
     default:
       break;
   }
+
+  mode_count = 0;
 }
 

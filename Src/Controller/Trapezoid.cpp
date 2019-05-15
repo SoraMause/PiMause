@@ -47,8 +47,9 @@ Trapezoid* Trapezoid::getInstance()
  * @return　なし
  * @detail 加速区間の距離と減速距離を計算し求める
 */
-void Trapezoid::makeTrapezoid( float dis, float acc, float max_vel, float start_vel, float end_vel )
+void Trapezoid::makeTrapezoid( float dis, float acc, float max_vel, float start_vel, float end_vel, bool turn )
 {
+
   // 各種パラメータをリセット
   is_end = false;
   distance = 0.0f;
@@ -64,6 +65,8 @@ void Trapezoid::makeTrapezoid( float dis, float acc, float max_vel, float start_
   end_velocity = std::abs(end_vel);
   target_velocity = std::abs(dis);
   velocity = start_vel;
+
+  turn_flag = turn;
 
   if ( acc == 0.0f ){
     // 加速度が0のときは加減速の距離は0
@@ -132,4 +135,15 @@ bool Trapezoid::status()
 bool Trapezoid::travelDirection()
 {
   return travel_dir;
+}
+
+/**
+ * @brief 台形加速が回転か直進かを返す
+ * @param なし
+ * @return　なし
+ * @detail 直進 false, 回転 true
+*/
+bool Trapezoid::checkTrunOrStraight()
+{
+  return turn_flag;
 }
