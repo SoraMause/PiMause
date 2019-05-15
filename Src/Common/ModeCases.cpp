@@ -156,16 +156,56 @@ void ModeCases::moveTrapezoid()
 }
 
 /**
- * @brief 台形加速で超信知旋回の動作をさせる
+ * @brief 台形加速で超信知旋回の動作をさせる(左)
  * @param なし
  * @return　なし
 */
-void ModeCases::moveTrapezoidTurn()
+void ModeCases::moveTrapezoidTurnLeft()
 {
 
   motor->setSoftwareSwitch( true );
 
   trape->makeTrapezoid( 72.5f, 2000.0f, 300.0f, 0.0f, 0.0f, true );
+
+  while( trape->status() == false );
+
+  motor->control( 0, 0 );
+  motor->setSoftwareSwitch( false );
+
+  sleep( 1 );
+}
+
+/**
+ * @brief 台形加速で超信知旋回の動作をさせる(右)
+ * @param なし
+ * @return　なし
+*/
+void ModeCases::moveTrapezoidTurnRight()
+{
+
+  motor->setSoftwareSwitch( true );
+
+  trape->makeTrapezoid( -72.5f, 2000.0f, 300.0f, 0.0f, 0.0f, true );
+
+  while( trape->status() == false );
+
+  motor->control( 0, 0 );
+  motor->setSoftwareSwitch( false );
+
+  sleep( 1 );
+}
+
+/**
+ * @brief 台形加速で180度、超信知旋回の動作をさせる
+ * @param なし
+ * @return　なし
+*/
+void ModeCases::moveTrapezoidTurn180()
+{
+
+  motor->setSoftwareSwitch( true );
+
+  trape->makeTrapezoid( 145.0f, 2000.0f, 300.0f, 0.0f, 0.0f, true );
 
   while( trape->status() == false );
 

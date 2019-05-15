@@ -51,7 +51,13 @@ public:
   void moveTrapezoid();
 
   // 左90度ターン
-  void moveTrapezoidTurn();
+  void moveTrapezoidTurnLeft();
+
+  // 右90度ターン
+  void moveTrapezoidTurnRight();
+
+  // 180度ターン(左)
+  void moveTrapezoidTurn180();
 
 private:
 };

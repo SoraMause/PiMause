@@ -126,13 +126,15 @@ void Mode::transition( int mode_number )
       break;
 
     case 5:
-      cases->moveTrapezoidTurn();
+      cases->moveTrapezoidTurnLeft();
       break;
 
     case 6:
+      cases->moveTrapezoidTurnRight();
       break;
 
     case 7:
+      cases->moveTrapezoidTurn180();
       break;
 
     case 8:
