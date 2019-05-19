@@ -18,7 +18,6 @@ private:
   Buzzer *buzzer = nullptr;
   Switch *sw = nullptr;
   ModeCases *cases = nullptr;
-  int mode_count = 0;
 
 public:
   // コンストラクタ

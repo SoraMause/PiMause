@@ -19,7 +19,7 @@ Motor* Motor::instance = nullptr;
 */
 Motor::Motor()
 {
-  on();
+
 }
 
 /**
@@ -29,7 +29,7 @@ Motor::Motor()
 */
 Motor::~Motor()
 {
-  off();
+  //off();
   delete instance;
 }
 
@@ -46,6 +46,24 @@ Motor* Motor::getInstance()
   return instance;
 }
 
+
+/**
+ * @brief ソフトウェアスイッチのオンオフ
+ * @param なし
+ * @return なし
+ * @detail 現在のソフトウェアスイッチのステータスを更新し、
+ *        　ソフトウェアスイッチをステータスに合わせてオンオフを行う 
+*/
+void Motor::setSoftwareSwitch( bool sw )
+{
+  status = sw;
+  if ( status ){
+    on();
+  } else {
+    off();
+  }
+}
+
 /**
  * @brief モーターのコントロールを行う
  * @param int left 左側の周波数
@@ -53,7 +71,9 @@ Motor* Motor::getInstance()
  * @return なし
 */
 void Motor::control( int left, int right )
-{  
+{
+  if ( !status ) on();
+  
   leftControl( left );
   rightControl( right );
 }
