@@ -73,19 +73,16 @@ void Mode::select()
         mode_count++;
         if ( mode_count > 8 ) mode_count = 0;
         led->illuminate( mode_count );
-        buzzer->on( A, 300 );
       }
 
       if ( sw1 ){
         mode_count--;
         if ( mode_count < 0 ) mode_count = 8;
         led->illuminate( mode_count );
-        buzzer->on( C, 300 );
       }
 
       if ( sw2 ) {
         led->illuminate( 0x00 );
-        buzzer->on( B, 300 );
         break;
       }
     }
