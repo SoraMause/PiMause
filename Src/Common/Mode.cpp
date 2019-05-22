@@ -7,6 +7,12 @@
 #include "Mode.h"
 
 #include <iostream>
+#include <unistd.h>
+
+#include <mutex>
+
+// グローバル領域にmtxを用意
+std::mutex mtx;
 
 /**
  * @brief モードクラスのコンストラクタ
@@ -61,10 +67,11 @@ void Mode::select()
 
   while( 1 ){
     while( 1 ){
+      mtx.lock();
       sw0 = sw->get0();
       sw1 = sw->get1();
       sw2 = sw->get2();
-
+      mtx.unlock();
       if ( sw0 ){
         mode_count++;
         if ( mode_count > 8 ) mode_count = 0;
@@ -84,6 +91,7 @@ void Mode::select()
     }
 
     transition( mode_count );
+    sleep( 1 );
   }
 
 }
