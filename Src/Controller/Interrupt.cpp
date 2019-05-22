@@ -8,6 +8,11 @@
 #include <iostream>
 #include <unistd.h>
 
+#include <mutex>
+
+// グローバル領域にmtxを用意
+std::mutex mtx;
+
 Interrupt* Interrupt::instance = nullptr;
 
 /**
@@ -71,7 +76,9 @@ void Interrupt::processing()
       left = -1 * left;
     }
 
+    mtx.lock();
     motor->control( left, right );
+    mtx.unlock();
 
     //std::cout << left << right << velocity << std::endl;
 
