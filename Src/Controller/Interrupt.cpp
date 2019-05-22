@@ -8,8 +8,6 @@
 #include <iostream>
 #include <unistd.h>
 
-#include <mutex>
-
 // グローバル領域にmtxを用意
 std::mutex mtx;
 

@@ -14,6 +14,10 @@
 #include <chrono>
 #include "Motor.h"
 
+#include <mutex>
+
+extern std::mutex mtx;
+
 class Interrupt
 {
 private:

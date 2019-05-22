@@ -9,10 +9,9 @@
 #include <iostream>
 #include <unistd.h>
 
-#include <mutex>
+#include "Interrupt.h"
 
-// グローバル領域にmtxを用意
-std::mutex mtx;
+#include <mutex>
 
 /**
  * @brief モードクラスのコンストラクタ
