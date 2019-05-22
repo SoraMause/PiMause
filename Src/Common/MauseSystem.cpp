@@ -6,6 +6,8 @@
 
 #include "MauseSystem.h"
 
+#include <unistd.h>
+
 /**
  * @brief マウスシステムクラスのコンストラクタ
  * @param なし
@@ -40,7 +42,7 @@ void MauseSystem::peripheral_init()
   motor = Motor::getInstance();
 
   led->illuminate( 0x0f );
-  buzzer->on( C, 300 );
+  sleep(1);
   led->illuminate( 0x00 );
 }
 
