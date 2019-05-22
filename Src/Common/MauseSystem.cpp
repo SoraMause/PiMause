@@ -35,7 +35,6 @@ MauseSystem::~MauseSystem()
 */
 void MauseSystem::peripheral_init()
 {
-  buzzer = Buzzer::getInstance();
   led = Led::getInstance();
   sw = Switch::getInstance();
   sensor = Sensor::getInstance();

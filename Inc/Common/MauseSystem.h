@@ -9,7 +9,6 @@
 
 #include "Switch.h"
 #include "Led.h"
-#include "Buzzer.h"
 #include "Motor.h"
 #include "Sensor.h"
 #include "Interrupt.h"
@@ -17,7 +16,6 @@
 class MauseSystem
 {
 private:
-  Buzzer *buzzer;
   Led *led;
   Switch *sw;
   Sensor *sensor;
