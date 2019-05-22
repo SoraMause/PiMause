@@ -150,7 +150,7 @@ void ModeCases::moveTrapezoid()
   while( trape->status() == false );
 
   motor->control( 0, 0 );
-  motor->setSoftwareSwitch( false );
+
 
   sleep( 1 );
 }
