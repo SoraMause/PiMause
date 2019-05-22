@@ -143,8 +143,6 @@ void ModeCases::checkStepFrequency()
 void ModeCases::moveTrapezoid()
 {
 
-  motor->setSoftwareSwitch( true );
-
   trape->makeTrapezoid( TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
 
   while( trape->status() == false );

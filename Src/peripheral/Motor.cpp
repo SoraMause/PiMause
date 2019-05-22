@@ -19,7 +19,7 @@ Motor* Motor::instance = nullptr;
 */
 Motor::Motor()
 {
-
+  on();
 }
 
 /**
