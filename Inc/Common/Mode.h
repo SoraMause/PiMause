@@ -15,7 +15,6 @@
 class Mode {
 private:
   Led *led = nullptr;
-  Buzzer *buzzer = nullptr;
   Switch *sw = nullptr;
   ModeCases *cases = nullptr;
 

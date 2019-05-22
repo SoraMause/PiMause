@@ -40,10 +40,6 @@ void Mode::init()
     led = Led::getInstance();
   }
 
-  if ( buzzer == nullptr ){
-    buzzer = Buzzer::getInstance();
-  }
-
   if ( sw == nullptr ){
     sw = Switch::getInstance();
   }
