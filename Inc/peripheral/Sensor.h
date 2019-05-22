@@ -8,6 +8,8 @@
 #define __SENSOR__H
 
 #include "Map.h"
+#include <cstdio>
+
 
 struct Sensor_Data
 {
@@ -29,6 +31,8 @@ private:
   Sensor_Data sen_front;
   Sensor_Data sen_left;
   Sensor_Data sen_right;
+
+  std::FILE *sensor_fp;
 
 public:
   // センサークラスのコンストラクタ

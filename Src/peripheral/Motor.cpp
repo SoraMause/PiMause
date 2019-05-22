@@ -3,12 +3,8 @@
  * @author yuta seya
  * @date 2019 3.25 
 */
-
-#include <cstdio>
-
 #include "Motor.h"
 
-#include <cstdio>
 
 Motor* Motor::instance = nullptr;
 
@@ -19,7 +15,9 @@ Motor* Motor::instance = nullptr;
 */
 Motor::Motor()
 {
-
+  left_fp = std::fopen( "/dev/rtmotor_raw_l0","w" );
+  right_fp = std::fopen( "/dev/rtmotor_raw_r0","w" );
+  soft_sw = std::fopen( "/dev/rtmotoren0","w" );
 }
 
 /**
@@ -29,7 +27,10 @@ Motor::Motor()
 */
 Motor::~Motor()
 {
-  //off();
+  off();
+  std::fclose(left_fp);
+  std::fclose(right_fp);
+  std::fclose(soft_sw);
   delete instance;
 }
 
@@ -166,10 +167,9 @@ void Motor::resetRightStep()
 */
 void Motor::off()
 {
-  std::FILE *sw;
-  sw = std::fopen( "/dev/rtmotoren0","w" );
-  std::fprintf( sw, "0" ); 
-  std::fclose( sw );
+
+  std::fprintf( soft_sw, "0" ); 
+  
 }
 
 /**
@@ -179,10 +179,7 @@ void Motor::off()
 */
 void Motor::on()
 {
-  std::FILE *sw;
-  sw = std::fopen( "/dev/rtmotoren0","w" );
-  std::fprintf( sw, "1" ); 
-  std::fclose( sw );
+  std::fprintf( soft_sw, "1" ); 
 }
 
 /**
@@ -192,10 +189,9 @@ void Motor::on()
 */
 void Motor::leftControl( int hz )
 {
-  std::FILE *motor;
-  motor = std::fopen( "/dev/rtmotor_raw_l0","w" );
-  std::fprintf( motor, "%d", hz ); 
-  std::fclose( motor );
+
+  std::fprintf( left_fp, "%d", hz ); 
+
 }
 
 /**
@@ -205,8 +201,7 @@ void Motor::leftControl( int hz )
 */
 void Motor::rightControl( int hz )
 {
-  std::FILE *motor;
-  motor = std::fopen( "/dev/rtmotor_raw_r0","w" );
-  std::fprintf( motor, "%d", hz ); 
-  std::fclose( motor );
+
+  std::fprintf( right_fp, "%d", hz ); 
+
 }
