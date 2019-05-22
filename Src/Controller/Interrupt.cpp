@@ -69,7 +69,6 @@ void Interrupt::processing()
 
     if ( trape->checkTurn() ){
       left = -1 * left;
-      right = -1 * right;
     }
 
     motor->control( left, right );
