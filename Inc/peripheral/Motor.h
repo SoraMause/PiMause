@@ -7,17 +7,11 @@
 #ifndef __MOTOR__H
 #define __MOTOR__H
 
-#include <cstdio>
-
 class Motor {
 private:
   static Motor* instance;
   
   bool status = false; // 現在のステータス
-
-  std::FILE *left_fp;
-  std::FILE *right_fp;
-  std::FILE *soft_sw;
   
 public:
   // コンストラクタ

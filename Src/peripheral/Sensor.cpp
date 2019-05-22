@@ -6,6 +6,7 @@
 
 #include "Sensor.h"
 
+#include <cstdio>
 
 Sensor* Sensor::instance = nullptr;
 
@@ -16,7 +17,6 @@ Sensor* Sensor::instance = nullptr;
 */
 Sensor::Sensor()
 {
-  sensor_fp = std::fopen("/dev/rtlightsensor0", "r" );
 }
 
 /**
@@ -26,7 +26,6 @@ Sensor::Sensor()
 */
 Sensor::~Sensor()
 {
-  fclose(sensor_fp);
   delete instance;
 }
 
@@ -88,13 +87,16 @@ void Sensor::setConstant( Sensor_Data *data, int reference, int threshold, int d
 
 void Sensor::show()
 {
+  std::FILE *data;
 
   int fr = 0;
   int r = 0;
   int l = 0;
   int fl = 0;
 
-  std::fscanf( sensor_fp, "%d %d %d %d", &fr, &r, &l, &fl );
+  data = std::fopen("/dev/rtlightsensor0", "r" );
+  std::fscanf( data, "%d %d %d %d", &fr, &r, &l, &fl );
+  std::fclose( data );
 
   std::printf( "%d, %d, %d, %d \r\n",fl, l, r, fr );
 }
@@ -144,14 +146,16 @@ void Sensor::checkWall()
 */
 void Sensor::read()
 {
+  std::FILE *data;
 
   int fr = 0;
   int r = 0;
   int l = 0;
   int fl = 0;
 
-  std::fscanf( sensor_fp, "%d %d %d %d", &fr, &r, &l, &fl );
-
+  data = std::fopen("/dev/rtlightsensor0", "r" );
+  std::fscanf( data, "%d %d %d %d", &fr, &r, &l, &fl );
+  std::fclose( data );
   sen_front.now = ( fr + fl ) / 2;
   sen_left.now = l;
   sen_right.now = r; 
