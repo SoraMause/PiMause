@@ -66,6 +66,7 @@ void Interrupt::processing()
   while( 1 ){
     processing_start = std::chrono::system_clock::now();
     
+    mtx.lock();
     velocity = trape->getNextVelocity();
     target_trans->calcStepFrequency( velocity );
     target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
@@ -74,7 +75,6 @@ void Interrupt::processing()
       left = -1 * left;
     }
 
-    mtx.lock();
     motor->control( left, right );
     mtx.unlock();
 
