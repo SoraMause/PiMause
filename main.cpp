@@ -18,6 +18,8 @@ int main()
   MauseSystem *mause = new MauseSystem();
   mause->peripheral_init();
 
+  mause->waitStartThread();
+
   ControlThread control;
 
   control.run();

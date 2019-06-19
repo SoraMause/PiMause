@@ -30,6 +30,9 @@ public:
 
   // 周辺機能の初期化
   void peripheral_init();
+
+  // スレッドがすぐにスタートしないように待つ
+  void waitStartThread();
   
 };
 
