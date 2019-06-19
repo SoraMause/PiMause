@@ -9,8 +9,6 @@
 #include <unistd.h>
 
 // グローバル領域にmtxを用意
-std::mutex mtx;
-
 Interrupt* Interrupt::instance = nullptr;
 
 /**
@@ -66,7 +64,6 @@ void Interrupt::processing()
   while( 1 ){
     processing_start = std::chrono::system_clock::now();
     
-    mtx.lock();
     velocity = trape->getNextVelocity();
     target_trans->calcStepFrequency( velocity );
     target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
@@ -76,7 +73,6 @@ void Interrupt::processing()
     }
 
     motor->control( left, right );
-    mtx.unlock();
 
     //std::cout << left << right << velocity << std::endl;
 

@@ -8,7 +8,6 @@
 #include <unistd.h>
 
 #include "MauseSystem.h"
-#include "ControlThread.h"
 
 using namespace std;
 
@@ -20,9 +19,7 @@ int main()
 
   mause->waitStartThread();
 
-  ControlThread control;
 
-  control.run();
   
   return 0;
 }
