@@ -9,6 +9,8 @@
 
 #include "MauseSystem.h"
 
+#include "Mode.h"
+
 using namespace std;
 
 int main()
@@ -19,7 +21,9 @@ int main()
 
   mause->waitStartThread();
 
+  Mode *mode = new Mode();
 
-  
+  mode->select();
+
   return 0;
 }
