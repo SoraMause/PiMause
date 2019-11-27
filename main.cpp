@@ -36,6 +36,7 @@ int main()
   std::thread th_b(interrupt_run);
 
   th_a.join();
+  sleep(1);
   th_b.join();
   
   return 0;
