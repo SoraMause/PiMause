@@ -62,7 +62,7 @@ void ModeCases::init()
     trape = Trapezoid::getInstance();
   } 
 
-  if ( trape == nullptr ){
+  if ( interrupt == nullptr ){
     interrupt = Interrupt::getInstance();
   } 
 }
