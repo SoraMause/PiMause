@@ -63,9 +63,15 @@ void Interrupt::processing()
   while( 1 ){
     processing_start = std::chrono::system_clock::now();
     
-    velocity = trape->getNextVelocity();
-    target_trans->calcStepFrequency( velocity );
-    target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
+    if(trape->status() == false){
+      velocity = trape->getNextVelocity();
+      target_trans->calcStepFrequency( velocity );
+      target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
+    } else {
+      left = 0;
+      right = 0;
+    }
+
 
     if ( trape->checkTurn() ){
       left = -1 * left;
