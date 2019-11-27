@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <unistd.h>
+#include <cstdio>
 
 Interrupt* Interrupt::instance = nullptr;
 
@@ -68,6 +69,7 @@ void Interrupt::processing()
       target_trans->calcStepFrequency( velocity );
       target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
     } else {
+      std::printf("act\r");
       left = 0;
       right = 0;
     }
