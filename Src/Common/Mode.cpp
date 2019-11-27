@@ -8,6 +8,10 @@
 
 #include <iostream>
 
+#include <unistd.h>
+
+#include <cstdio>
+
 /**
  * @brief モードクラスのコンストラクタ
  * @param なし
@@ -65,6 +69,8 @@ void Mode::select()
       sw1 = sw->get1();
       sw2 = sw->get2();
 
+      std::printf("sw0 : %d, sw1 : %d, sw2 : %d\r\n",sw0, sw1, sw2 );
+
       if ( sw0 ){
         mode_count++;
         if ( mode_count > 8 ) mode_count = 0;
@@ -81,6 +87,7 @@ void Mode::select()
         led->illuminate( 0x00 );
         break;
       }
+      sleep(1);
     }
 
     transition( mode_count );
