@@ -61,6 +61,10 @@ void ModeCases::init()
   if ( trape == nullptr ){
     trape = Trapezoid::getInstance();
   } 
+
+  if ( trape == nullptr ){
+    interrupt = Interrupt::getInstance();
+  } 
 }
 
 /**
@@ -142,6 +146,7 @@ void ModeCases::checkStepFrequency()
 */
 void ModeCases::moveTrapezoid()
 {
+  interrupt->setControl(true);
 
   trape->makeTrapezoid( TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
 
@@ -152,9 +157,6 @@ void ModeCases::moveTrapezoid()
   trape->makeTrapezoid( -TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
 
   while( trape->status() == false );
-
-  motor->control( 0, 0 );
-
 
   sleep( 1 );
 }

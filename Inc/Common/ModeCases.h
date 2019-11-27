@@ -15,6 +15,7 @@
 #include "Maze.h"
 
 #include "Trapezoid.h"
+#include "Interrupt.h"
 
 class ModeCases {
 private:
@@ -24,6 +25,7 @@ private:
   Switch *sw = nullptr;
   Maze *maze = nullptr;
   Trapezoid *trape = nullptr;
+  Interrupt *interrupt = nullptr;
 
 public:
   // コンストラクタ
