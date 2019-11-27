@@ -29,7 +29,7 @@ private:
   float distance = 0.0f; // 距離
 
   bool travel_dir = false;
-  bool turn = false;
+  bool turn = true;
 
   #define dt 0.01f     // 制御時間
 

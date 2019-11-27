@@ -20,7 +20,9 @@
 Mode::Mode()
 {
   cases = new ModeCases();
+  th = new ControlThread();
   cases->init();
+  th->run();
 }
 
 /**
