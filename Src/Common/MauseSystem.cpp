@@ -35,6 +35,7 @@ MauseSystem::~MauseSystem()
 */
 void MauseSystem::peripheral_init()
 {
+  sleep(1);
   led = Led::getInstance();
   sw = Switch::getInstance();
   sensor = Sensor::getInstance();
@@ -43,17 +44,5 @@ void MauseSystem::peripheral_init()
   led->illuminate( 0x0f );
   sleep(1);
   led->illuminate( 0x00 );
-}
-
-void MauseSystem::waitStartThread()
-{
-  while( 1 ){
-    if( sw->get0() == 1 ) break;
-
-    led->illuminate( 0x0f );
-    sleep(1);
-    led->illuminate( 0x00 );
-    sleep(1);
-  }
 }
 

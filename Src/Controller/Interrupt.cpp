@@ -8,7 +8,6 @@
 #include <iostream>
 #include <unistd.h>
 
-// グローバル領域にmtxを用意
 Interrupt* Interrupt::instance = nullptr;
 
 /**
@@ -61,6 +60,7 @@ Interrupt* Interrupt::getInstance()
 */
 void Interrupt::processing()
 {
+  while( 1 ){
     processing_start = std::chrono::system_clock::now();
     
     velocity = trape->getNextVelocity();
@@ -85,7 +85,8 @@ void Interrupt::processing()
     right = 0;
     velocity = 0.0f;
     usleep( wait_time );
-
+    
+  }
 }
 
 /**

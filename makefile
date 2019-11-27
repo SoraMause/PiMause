@@ -1,9 +1,9 @@
 COMPILER  = g++
-CFLAGS    = -g -MMD -MP -Wall -Wextra -Winit-self -Wno-missing-field-initializers -std=c++11
+CFLAGS    = -g -MMD -MP -Wall -Wextra -Winit-self -Wno-missing-field-initializers -std=c++11 -O0
 ifeq "$(shell getconf LONG_BIT)" "64"
-  LDFLAGS = 
+  LDFLAGS = -pthread
 else
-  LDFLAGS = 
+  LDFLAGS = -pthread
 endif
 LIBS      =
 INCLUDE   = -I./Inc/peripheral \

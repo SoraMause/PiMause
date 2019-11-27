@@ -7,11 +7,6 @@
 #include "Mode.h"
 
 #include <iostream>
-#include <unistd.h>
-
-#include "Interrupt.h"
-
-#include <mutex>
 
 /**
  * @brief モードクラスのコンストラクタ
@@ -69,6 +64,7 @@ void Mode::select()
       sw0 = sw->get0();
       sw1 = sw->get1();
       sw2 = sw->get2();
+
       if ( sw0 ){
         mode_count++;
         if ( mode_count > 8 ) mode_count = 0;
@@ -88,7 +84,6 @@ void Mode::select()
     }
 
     transition( mode_count );
-    sleep( 1 );
   }
 
 }
