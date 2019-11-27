@@ -11,14 +11,12 @@
 #include "Buzzer.h"
 #include "Switch.h"
 #include "ModeCases.h"
-#include "ControlThread.h"
 
 class Mode {
 private:
   Led *led = nullptr;
   Switch *sw = nullptr;
   ModeCases *cases = nullptr;
-  ControlThread *th;
 
 public:
   // コンストラクタ

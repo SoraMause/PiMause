@@ -9,16 +9,34 @@
 
 #include "MauseSystem.h"
 #include "Mode.h"
+#include <thread>
+#include <Interrupt.h>
 
 using namespace std;
+
+Mode *mode = new Mode();;
+Interrupt * interrupt = Interrupt::getInstance();
+
+void mode_run()
+{  
+  mode->select();
+}
+
+void interrupt_run()
+{
+  interrupt->processing();
+}
 
 int main()
 {
  
   MauseSystem *mause = new MauseSystem();
   mause->peripheral_init();
-  Mode *mode = new Mode();
-  mode->select();
+  std::thread th_a(mode_run);
+  std::thread th_b(interrupt_run);
+
+  th_a.join();
+  th_b.join();
   
   return 0;
 }
