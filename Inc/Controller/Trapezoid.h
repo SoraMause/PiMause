@@ -12,7 +12,7 @@ private:
   static Trapezoid *instance;
 
   // 終了しているかどうかを返す
-  bool is_end = false;
+  bool is_end = true;
 
   // 引数から与えられた定数
   float accel = 0.0f; // 加速度

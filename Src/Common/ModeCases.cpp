@@ -158,5 +158,4 @@ void ModeCases::moveTrapezoid()
 
   while( trape->status() == false );
 
-  sleep( 1 );
 }
