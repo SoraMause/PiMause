@@ -87,7 +87,7 @@ void Mode::select()
         led->illuminate( 0x00 );
         break;
       }
-      sleep(1);
+      usleep(100);
     }
 
     transition( mode_count );
