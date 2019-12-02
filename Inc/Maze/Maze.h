@@ -57,6 +57,9 @@ public:
   // 迷路情報のアップデートを行い、次の動作を返す
   uint8_t getNextAction( Position *pos, ExistWall *exist );
 
+  // マシンの座標を更新する
+  void updatePosition( Position *pos, uint8_t action );
+  
   // スタート動作かどうかのフラグをセットする
   void setStartFlag( bool _flag )
   {
@@ -100,9 +103,6 @@ private:
 
   // 次の動作を決める
   uint8_t updateNextAction( Position *pos );
-
-  // マシンの座標を更新する
-  void updatePosition( Position *pos, uint8_t action );
 
   // 仮想ゴールの管理を行う
   void manegeVirtualGoal( uint8_t x, uint8_t y, bool manege );

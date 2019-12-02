@@ -194,6 +194,7 @@ void Mode::select()
         
       uint8_t next_dir = Front;
 
+      maze->updatePosition(&pos, next_dir);
       trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
       while( trape->status() == false );
         
@@ -207,6 +208,7 @@ void Mode::select()
         if( next_dir == Front){
           trape->makeTrapezoid( 180.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           while( trape->status() == false );
+          maze->updatePosition(&pos, next_dir);
         } else if( next_dir == Left){
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           while( trape->status() == false );
@@ -214,6 +216,7 @@ void Mode::select()
           while( trape->status() == false );
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           while( trape->status() == false );
+          maze->updatePosition(&pos, next_dir);
         } else if( next_dir == Right) {
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           while( trape->status() == false );
@@ -221,6 +224,7 @@ void Mode::select()
           while( trape->status() == false );
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           while( trape->status() == false );
+          maze->updatePosition(&pos, next_dir);
         } else if( next_dir == Rear){
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           while( trape->status() == false );
@@ -230,6 +234,7 @@ void Mode::select()
           while( trape->status() == false );
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           while( trape->status() == false );
+          maze->updatePosition(&pos, next_dir);
         }
         trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
         while( trape->status() == false );
