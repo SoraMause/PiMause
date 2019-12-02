@@ -83,6 +83,8 @@ void Mode::init()
 void Mode::select()
 {
   init();
+  gx = 1;
+  gy = 0;
 
   sensor->setConstant(1000, 700, Front);
   sensor->setConstant(1000, 700, Left);
@@ -194,7 +196,7 @@ void Mode::select()
       uint8_t next_dir = Front;
         
       next_dir = maze->getNextAction(&pos, &exist);
-      trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+      trape->makeTrapezoid( 180.0f, 1000.0f, 300.0f, 0.0f, 0.0f, false );
       while( trape->status() == false );
         
         while(pos.x != goal_x && pos.y != goal_y)
@@ -204,24 +206,24 @@ void Mode::select()
           next_dir = maze->getNextAction(&pos, &exist);
           
           if( next_dir == Front){
-            trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            trape->makeTrapezoid( 180.0f, 1000.0f, 300.0f, 0.0f, 0.0f, false );
             while( trape->status() == false );
           } else if( next_dir == Left){
             trape->makeTrapezoid( TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
             while( trape->status() == false );
-            trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            trape->makeTrapezoid( 180.0f, 1000.0f, 300.0f, 0.0f, 0.0f, false );
             while( trape->status() == false );
           } else if( next_dir == Right) {
             trape->makeTrapezoid( -TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
             while( trape->status() == false );
-            trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            trape->makeTrapezoid( 180.0f, 1000.0f, 300.0f, 0.0f, 0.0f, false );
             while( trape->status() == false );
           } else if( next_dir == Rear){
             trape->makeTrapezoid( TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
             while( trape->status() == false );
             trape->makeTrapezoid( TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
             while( trape->status() == false );
-            trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            trape->makeTrapezoid( 180.0f, 1000.0f, 300.0f, 0.0f, 0.0f, false );
             while( trape->status() == false );
           }
         }
