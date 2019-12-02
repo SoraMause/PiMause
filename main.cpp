@@ -10,7 +10,7 @@
 #include "MauseSystem.h"
 #include "Mode.h"
 #include <thread>
-#include <Interrupt.h>
+#include "Interrupt.h"
 
 using namespace std;
 
@@ -27,6 +27,11 @@ void interrupt_run()
   interrupt->processing();
 }
 
+void sensor_run()
+{
+  interrupt->sensorProcessing();
+}
+
 int main()
 {
  
@@ -34,10 +39,11 @@ int main()
   mause->peripheral_init();
   std::thread th_a(mode_run);
   std::thread th_b(interrupt_run);
+  std::thread th_c(sensor_run);
 
   th_a.join();
-  sleep(1);
   th_b.join();
+  th_c.join();
   
   return 0;
 }

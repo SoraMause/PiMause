@@ -9,6 +9,10 @@
 #include <unistd.h>
 #include <cstdio>
 
+#include <mutex>
+
+std::mutex mtx;
+
 Interrupt* Interrupt::instance = nullptr;
 
 /**
@@ -29,6 +33,11 @@ Interrupt::Interrupt()
   if ( motor == nullptr ){
     motor = Motor::getInstance();
   }
+  
+  if ( sensor == nullptr){
+    sensor = Sensor::getInstance();
+  }
+  
 }
 
 /**
@@ -62,14 +71,16 @@ Interrupt* Interrupt::getInstance()
 void Interrupt::processing()
 {
   while( 1 ){
+    mtx.lock();
     processing_start = std::chrono::system_clock::now();
+    mtx.unlock();
     
     if(trape->status() == false){
       velocity = trape->getNextVelocity();
       target_trans->calcStepFrequency( velocity );
       target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
     } else {
-      std::printf("act\r");
+      //std::printf("act\r");
       left = 0;
       right = 0;
     }
@@ -79,41 +90,37 @@ void Interrupt::processing()
       left = -1 * left;
     }
 
+    mtx.lock();
     motor->control( left, right );
+    processing_end = std::chrono::system_clock::now();
+    mtx.unlock();
 
     //std::cout << left << right << velocity << std::endl;
-
-    processing_end = std::chrono::system_clock::now();
-  
-
-    double processing_time = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() );
-
-    uint32_t wait_time = (uint32_t)( 10000 - processing_time );
+    
     left = 0;
     right = 0;
     velocity = 0.0f;
+
+    double processing_time = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() );
+    
+    uint32_t wait_time = (uint32_t)( 5000 - processing_time );
+
     usleep( wait_time );
     
   }
 }
 
-/**
- * @brief コントロールフラグのセットをする
- * @param なし
- * @return　なし
-*/
-void Interrupt::setSensor( bool flag )
-{
-  sensor_light = flag;
-}
 
-/**
- * @brief センサフラグのセットをする
- * @param なし
- * @return　なし
-*/
-void Interrupt::setControl( bool flag )
+void Interrupt::sensorProcessing()
 {
-  control = flag;
+  while(1){
+    mtx.lock();
+    processing_start = std::chrono::system_clock::now();
+    sensor->get(&sen_front, &sen_left, &sen_right);
+    processing_end = std::chrono::system_clock::now();
+    mtx.unlock();
+    double processing_time = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() );
+    uint32_t wait_time = (uint32_t)( 5000 - processing_time );
+    usleep( wait_time );
+  }
 }
-

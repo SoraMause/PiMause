@@ -17,6 +17,7 @@ Sensor* Sensor::instance = nullptr;
 */
 Sensor::Sensor()
 {
+
 }
 
 /**
@@ -51,13 +52,12 @@ Sensor* Sensor::getInstance()
  * @return なし
  * @detail センサ関連の処理をしたのち、センサのデータを返す。
 */
-void Sensor::get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real )
+void Sensor::get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right)
 {
   update();
   *front = sen_front;
   *left = sen_left;
   *right = sen_right; 
-  *real = exist;
 }
 
 /**
@@ -68,11 +68,8 @@ void Sensor::get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, Exi
  * @param int dir 向きを決める 
  * @return なし
 */
-void Sensor::setConstant( Sensor_Data *data, int reference, int threshold, int dir )
+void Sensor::setConstant( int reference, int threshold, int dir )
 {
-  data->reference = reference;
-  data->threshold = threshold;
-
   if ( dir == Front ){
     sen_front.reference = reference;
     sen_front.threshold = threshold;
@@ -87,18 +84,19 @@ void Sensor::setConstant( Sensor_Data *data, int reference, int threshold, int d
 
 void Sensor::show()
 {
-  std::FILE *data;
+  //std::FILE *data;
 
-  int fr = 0;
-  int r = 0;
-  int l = 0;
-  int fl = 0;
+  //int fr = 0;
+  //int r = 0;
+  //int l = 0;
+  //int fl = 0;
 
-  data = std::fopen("/dev/rtlightsensor0", "r" );
-  std::fscanf( data, "%d %d %d %d", &fr, &r, &l, &fl );
-  std::fclose( data );
+  //data = std::fopen("/dev/rtlightsensor0", "r" );
+  //std::fscanf( data, "%d %d %d %d", &fr, &r, &l, &fl );
+  //std::fclose( data );
 
-  std::printf( "%d, %d, %d, %d \r\n",fl, l, r, fr );
+  //update();
+  std::printf( "%d, %d, %d\r\n",sen_front.now, sen_left.now, sen_right.now);
 }
 
 /**
@@ -197,3 +195,7 @@ void Sensor::updateDiff()
 
 }
 
+void Sensor::getWalldata(ExistWall *real)
+{
+  *real = exist;
+}

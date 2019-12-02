@@ -12,6 +12,12 @@
 
 #include <cstdio>
 
+#include <mutex> 
+
+#include "TargetGenerator.h"
+
+extern std::mutex mtx;
+
 /**
  * @brief モードクラスのコンストラクタ
  * @param なし
@@ -19,8 +25,7 @@
 */
 Mode::Mode()
 {
-  cases = new ModeCases();
-  cases->init();
+
 }
 
 /**
@@ -30,7 +35,7 @@ Mode::Mode()
 */
 Mode::~Mode()
 {
-  delete cases;
+
 }
 
 /**
@@ -48,7 +53,26 @@ void Mode::init()
     sw = Switch::getInstance();
   }
 
-  led->illuminate( 0x00 );
+  if ( sensor == nullptr ){
+    sensor = Sensor::getInstance();
+  }
+
+  if ( motor == nullptr ){
+    motor = Motor::getInstance();
+  }
+
+  if ( maze == nullptr ){
+    maze = Maze::getInstance();
+  } 
+
+  if ( trape == nullptr ){
+    trape = Trapezoid::getInstance();
+  } 
+
+  if ( interrupt == nullptr ){
+    interrupt = Interrupt::getInstance();
+  } 
+  
 }
 
 /**
@@ -60,84 +84,150 @@ void Mode::select()
 {
   init();
 
+  sensor->setConstant(1000, 700, Front);
+  sensor->setConstant(1000, 700, Left);
+  sensor->setConstant(1000, 700, Right);
+
   bool sw0,sw1,sw2;
   int mode_count = 0;
 
   while( 1 ){
     while( 1 ){
+      mtx.lock();
       sw0 = sw->get0();
       sw1 = sw->get1();
       sw2 = sw->get2();
-
       std::printf("sw0 : %d, sw1 : %d, sw2 : %d\r\n",sw0, sw1, sw2 );
+      mtx.unlock();
 
       if ( sw0 ){
         mode_count++;
         if ( mode_count > 8 ) mode_count = 0;
+        mtx.lock();
         led->illuminate( mode_count );
+        mtx.unlock();
       }
 
       if ( sw1 ){
         mode_count--;
         if ( mode_count < 0 ) mode_count = 8;
+        mtx.lock();
         led->illuminate( mode_count );
+        mtx.unlock();
       }
 
       if ( sw2 ) {
+        mtx.lock();
         led->illuminate( 0x00 );
+        mtx.unlock();
         break;
       }
       usleep(100);
     }
 
-    transition( mode_count );
+    if( mode_count == 0){
+      Position pos;
+      pos.init();
+      mtx.lock();
+      maze->show( pos );
+      mtx.unlock();
+    } else if( mode_count == 1){
+      while( 1 ){
+        mtx.lock();
+        sensor->show();
+        sw1 = sw->get1();
+        mtx.unlock();
+        if ( sw1 ) break;
+        usleep(10000);
+      }
+    } else if( mode_count == 2 ){
+      float vel = 0.0f;
+
+      trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+
+      while( trape->status() == false ){
+        vel = trape->getNextVelocity();
+        mtx.lock();
+        std::printf( "%f\n", vel );
+        mtx.unlock();
+      }
+    } else if( mode_count == 3 ){
+      float velocity = 0.0f;
+      int left = 0;
+      int right = 0;
+
+      TargetGenerator *trans_target = new TargetGenerator();
+
+      trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+      mtx.lock();
+      std::printf("velocity ,left, right \r\n");
+      mtx.unlock();
+
+      while( trape->status() == false ){
+        velocity = trape->getNextVelocity();
+        trans_target->calcStepFrequency( velocity );
+        trans_target->getStepFrequency( &left, &right, false );
+        mtx.lock();
+        std::printf("%5.5f, %d, %d\r\n", velocity, left, right );
+        mtx.unlock();
+        left = 0;
+        right = 0;
+      }
+      delete trans_target;
+    } else if( mode_count == 4 ){
+      trape->makeTrapezoid( TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
+      while( trape->status() == false );
+
+      usleep( 300 );
+        
+      trape->makeTrapezoid( -TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
+      while( trape->status() == false );
+    } else if( mode_count == 5 ){
+      Position pos;
+      ExistWall exist;
+      uint8_t goal_x = gx;
+      uint8_t goal_y = gy;
+      maze->setGoal(goal_x, goal_y);
+      pos.init();
+	    maze->resetMap();
+        
+      uint8_t next_dir = Front;
+        
+      next_dir = maze->getNextAction(&pos, &exist);
+      trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+      while( trape->status() == false );
+        
+        while(pos.x != goal_x && pos.y != goal_y)
+        {	
+          sensor->getWalldata(&exist);
+          //printf("%d, %d, %d\r\n", exist.front, exist.left, exist.right); 
+          next_dir = maze->getNextAction(&pos, &exist);
+          
+          if( next_dir == Front){
+            trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            while( trape->status() == false );
+          } else if( next_dir == Left){
+            trape->makeTrapezoid( TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
+            while( trape->status() == false );
+            trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            while( trape->status() == false );
+          } else if( next_dir == Right) {
+            trape->makeTrapezoid( -TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
+            while( trape->status() == false );
+            trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            while( trape->status() == false );
+          } else if( next_dir == Rear){
+            trape->makeTrapezoid( TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
+            while( trape->status() == false );
+            trape->makeTrapezoid( TURN_90, 1000.0f, 300.0f, 0.0f, 0.0f, true );
+            while( trape->status() == false );
+            trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            while( trape->status() == false );
+          }
+        }
+    }
+    mode_count = 0;
   }
 
-}
-
-/**
- * @brief モード遷移をする
- * @param int mode_number モードの番号
- * @return　なし
-*/
-void Mode::transition( int mode_number )
-{
-
-  switch( mode_number ){
-    case 0:
-      cases->checkMaze();
-      break;
-
-    case 1:
-      cases->checkSensor();
-      break;
-
-    case 2:
-      cases->checkTrape();
-      break;
-
-    case 3:
-      cases->checkStepFrequency();
-      break;
-
-    case 4:
-      cases->moveTrapezoid();
-      break;
-
-    case 5:
-      break;
-
-    case 6:
-      break;
-
-    case 7:
-      break;
-
-    case 8:
-      break;
-
-    default:
-      break;
-  }
 }
 

@@ -31,7 +31,7 @@ private:
   bool travel_dir = false;
   bool turn = true;
 
-  #define dt 0.01f     // 制御時間
+  #define dt 0.005f     // 制御時間
 
 public:
   #define ONE_BLOCK 180.0f

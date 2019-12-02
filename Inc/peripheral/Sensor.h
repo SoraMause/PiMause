@@ -29,6 +29,7 @@ private:
   Sensor_Data sen_front;
   Sensor_Data sen_left;
   Sensor_Data sen_right;
+  bool show_status = false;
 
 public:
   // センサークラスのコンストラクタ
@@ -41,17 +42,22 @@ public:
   static Sensor* getInstance();
 
   // センサの情報を返す
-  void get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real );
+  void get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right);
 
   // リファレンス値をセットする
-  void setConstant( Sensor_Data *data, int reference, int threshold, int dir );
+  void setConstant(int reference, int threshold, int dir );
 
   // センサ値を表示
   void show();
-
-private:
+  
+  // 壁情報を取得
+  void getWalldata(ExistWall *real);
+  
   // センサの処理を更新
   void update();
+
+private:
+
   
   // 壁があるかどうか判断する
   void checkWall();

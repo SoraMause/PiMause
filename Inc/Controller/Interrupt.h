@@ -23,9 +23,6 @@ private:
   Sensor *sensor = nullptr;
   Motor *motor = nullptr;
 
-  bool control = false;
-  bool sensor_light = false;
-
   int left = 0;
   int right = 0;
   float velocity = 0.0f;
@@ -46,18 +43,10 @@ public:
   // 処理を行う
   void processing();
 
-  // センサの割り込み処理を行う
+  // sensor
   void sensorProcessing();
 
-  // センサのフラグをセットする
-  void setSensor( bool flag );
-
-  // コントロールのフラグをセットする
-  void setControl( bool flag );
-
-
 private:
-  ExistWall exist;
   Sensor_Data sen_front;
   Sensor_Data sen_left;
   Sensor_Data sen_right;

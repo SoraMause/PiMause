@@ -88,7 +88,7 @@ void Maze::setGoal( uint8_t _gx, uint8_t _gy )
 }
 
 /**
- * @brief 迷路観戦のアップデートをしたのち、次の動作を返す
+ * @brief 迷路関連のアップデートをしたのち、次の動作を返す
  * @param Position pos マウスの座標、向きの情報をもった構造体
  * @param ExsitWall exist 壁の有無の情報を持った構造体
  * @return 次の動作
