@@ -201,8 +201,10 @@ void Mode::select()
         
       while(pos.x != goal_x && pos.y != goal_y){	
         sensor->getWalldata(&exist);
-        //printf("%d, %d, %d\r\n", exist.front, exist.left, exist.right); 
         next_dir = maze->getNextAction(&pos, &exist);
+        mtx.lock();
+        printf("%d, %d, %d, %d\r\n", exist.front, exist.left, exist.right, next_dir); 
+        mtx.unlock();
           
         if( next_dir == Front){
           trape->makeTrapezoid( 180.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
