@@ -193,17 +193,13 @@ void Mode::select()
 	    maze->resetMap();
         
       uint8_t next_dir = Front;
-        
-      next_dir = maze->getNextAction(&pos, &exist);
+    
       trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
       while( trape->status() == false );
         
       while(pos.x != goal_x || pos.y != goal_y){	
         sensor->getWalldata(&exist);
         next_dir = maze->getNextAction(&pos, &exist);
-        mtx.lock();
-        std::printf("%d, %d, %d, %d\r\n", exist.front, exist.left, exist.right, next_dir); 
-        mtx.unlock();
           
         if( next_dir == Front){
           trape->makeTrapezoid( 180.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
