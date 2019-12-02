@@ -248,12 +248,12 @@ void Mode::select()
           while( trape->status() == false );
           maze->updatePosition(&pos, next_dir);
         }
-          mtx.lock();
-          std::printf("call end\r\n"); 
-          mtx.unlock();
-        trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
-        while( trape->status() == false );
       }
+      mtx.lock();
+      std::printf("call end\r\n"); 
+      mtx.unlock();
+      trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+      while( trape->status() == false );
     }
     mode_count = 0;
   }
