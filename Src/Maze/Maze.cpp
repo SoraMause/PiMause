@@ -105,9 +105,9 @@ uint8_t Maze::getNextAction( Position *pos, ExistWall *exist )
   map->addWall( pos->x, pos-> y, exist, pos->direction );
   updateStepMap();
   next = updateNextAction( pos );
-  mtx.lock();
-  std::printf("x = %d, y = %d\r\n", pos->x, pos->y);
-  mtx.unlock();
+  //mtx.lock();
+  //std::printf("x = %d, y = %d\r\n", pos->x, pos->y);
+  //mtx.unlock();
 
   return next;
 }
