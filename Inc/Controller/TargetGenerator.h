@@ -23,7 +23,7 @@ private:
   // d[mm/step] = 48.0 * ( 0.9 * pi / 360)
   #define STEP_DISTANCE_CONST 0.37699111843 
 
-  #define sensor_kp 0.5f
+  #define sensor_kp 0.15f
 
 public:
   // コンストラクタ
