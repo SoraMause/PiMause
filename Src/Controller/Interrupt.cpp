@@ -87,8 +87,8 @@ void Interrupt::processing()
 
     if(side_sensor_control && velocity > 100.0f){
       side_sensor_feedback = target_trans->clacSideSensorP(sen_left, sen_right);
-      left += side_sensor_feedback;
-      right -= side_sensor_feedback;
+      left -= side_sensor_feedback;
+      right += side_sensor_feedback;
     } else {
       side_sensor_feedback = 0;
     }
