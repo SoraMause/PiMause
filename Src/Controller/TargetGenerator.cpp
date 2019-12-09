@@ -64,8 +64,33 @@ void TargetGenerator::calcStepFrequency( float velocity )
  * @param なし
  * @return　なし
 */
-int16_t TargetGenerator::clacSensorP( Sensor_Data *sen_front, Sensor_Data *sen_left, Sensor_Data *sen_roght, bool rotation )
+int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen_right)
 {
-  step_sensor = 0;
+  float step_value = 0.0f;
+  if( sen_left.diff_3ms < 100 || sen_right.diff_3ms < 100){
+    if(sen_left.now > sen_left.threshold && sen_right.now > sen_right.threshold){
+      // 両壁があるとき
+      step_value = (float)(sen_left.now-sen_left.reference) - (sen_right.now-sen_right.reference);
+      step_value *= sensor_kp;
+      if(step_value > 300) step_value = 300.0f;
+      else if(step_value < -300) step_value = -300.0f;
+    } else if(sen_left.now > sen_left.threshold){
+      // 左壁があるとき
+      step_value = (float)(sen_left.now-sen_left.reference);
+      step_value *= 2.0f * sensor_kp;
+      if(step_value > 300) step_value = 300.0f;
+      else if(step_value < -300) step_value = -300.0f;
+    } else if(sen_right.now > sen_right.threshold){
+      // 右壁があるとき
+      step_value = (float)(sen_right.now-sen_right.reference);
+      step_value *= -2.0f * sensor_kp;
+      if(step_value > 300) step_value = 300.0f;
+      else if(step_value < -300) step_value = -300.0f;
+    } else {
+      step_sensor = 0;
+    }
+  }
+
+  step_sensor = (int16_t)step_value;
   return step_sensor;
 }

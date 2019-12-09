@@ -46,11 +46,26 @@ public:
   // sensor
   void sensorProcessing();
 
+  // 横壁制御設定
+  void setSideSensorControl(bool _flag)
+  {
+    side_sensor_control = _flag;
+  }
+
+  // 前壁制御設定
+  void setFrontWallControl(bool _flag)
+  {
+    front_wall_control = _flag;
+  }
+
 private:
   Sensor_Data sen_front;
   Sensor_Data sen_left;
   Sensor_Data sen_right;
-  
+  bool side_sensor_control = false;
+  bool front_wall_control = false;
+  int16_t side_sensor_feedback = 0;
+  int16_t front_wall_feedback = 0;
 };
 
 

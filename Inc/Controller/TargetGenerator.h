@@ -16,11 +16,13 @@ private:
   Trapezoid *trape;
 
   int step_vel = 0;
-  int step_sensor = 0.0f;
+  int16_t step_sensor = 0.0f;
 
   // TIRE_RADIUS 48.0f
   // d[mm/step] = 48.0 * ( 0.9 * pi / 360)
   #define STEP_DISTANCE_CONST 0.37699111843 
+
+  #define sensor_kp 1.0f
 
 public:
   // コンストラクタ
@@ -36,7 +38,7 @@ public:
   void calcStepFrequency( float velocity );
 
   // センサの値からフィードバックする
-  int16_t clacSensorP( Sensor_Data *sen_front, Sensor_Data *sen_left, Sensor_Data *sen_roght, bool rotation );
+  int16_t clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen_right);
 };
 
 

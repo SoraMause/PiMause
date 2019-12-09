@@ -191,7 +191,14 @@ void Mode::select()
       maze->setGoal(goal_x, goal_y);
       pos.init();
 	    maze->resetMap();
-        
+      mtx.lock();
+      led->illuminate(0x0f);
+      mtx.unlock();
+      sleep(1);
+      mtx.lock();
+      led->illuminate(0x01);
+      mtx.unlock();
+      sleep(1);
       uint8_t next_dir = Front;
 
       maze->updatePosition(&pos, next_dir);
@@ -199,6 +206,10 @@ void Mode::select()
       while( trape->status() == false );
         
       while(pos.x != goal_x || pos.y != goal_y){	
+        mtx.lock();
+        sw0 = sw->get0();
+        mtx.unlock();
+        if( sw0 ) break;
         sensor->getWalldata(&exist);
         next_dir = maze->getNextAction(&pos, &exist);
         //mtx.lock();
@@ -207,41 +218,61 @@ void Mode::select()
           
         if( next_dir == Front){
           trape->makeTrapezoid( 180.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+          interrupt->setSideSensorControl(true);
           while( trape->status() == false );
+          interrupt->setSideSensorControl(false);
           maze->updatePosition(&pos, next_dir);
         } else if( next_dir == Left){
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+          interrupt->setSideSensorControl(true);
           while( trape->status() == false );
+          interrupt->setSideSensorControl(false);
           trape->makeTrapezoid( TURN_90, 2000.0f, 300.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+          interrupt->setSideSensorControl(true);
           while( trape->status() == false );
+          interrupt->setSideSensorControl(false);
           maze->updatePosition(&pos, next_dir);
         } else if( next_dir == Right) {
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+          interrupt->setSideSensorControl(true);
           while( trape->status() == false );
+          interrupt->setSideSensorControl(false);
           trape->makeTrapezoid( -TURN_90, 2000.0f, 300.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+          interrupt->setSideSensorControl(true);
           while( trape->status() == false );
+          interrupt->setSideSensorControl(false);
           maze->updatePosition(&pos, next_dir);
         } else if( next_dir == Rear){
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+          interrupt->setSideSensorControl(true);
           while( trape->status() == false );
+          interrupt->setSideSensorControl(false);
           trape->makeTrapezoid( TURN_90, 2000.0f, 300.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
           trape->makeTrapezoid( TURN_90, 2000.0f, 300.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+          interrupt->setSideSensorControl(true);
           while( trape->status() == false );
+          interrupt->setSideSensorControl(false);
           maze->updatePosition(&pos, next_dir);
         }
       }
       trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
       while( trape->status() == false );
+    } else if(mode_count == 6){
+      sleep(1);
+      trape->makeTrapezoid( 360.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+      interrupt->setSideSensorControl(true);
+      while( trape->status() == false );
+      interrupt->setSideSensorControl(false);
     }
     mode_count = 0;
-  }
+  } 
 
 }
 

@@ -85,6 +85,19 @@ void Interrupt::processing()
       right = 0;
     }
 
+    if(side_sensor_control && velocity > 100.0f){
+      side_sensor_feedback = target_trans->clacSideSensorP(sen_left, sen_right);
+      left += side_sensor_feedback;
+      right -= side_sensor_feedback;
+    } else {
+      side_sensor_feedback = 0;
+    }
+
+    if(front_wall_control){
+
+    } else {
+      front_wall_feedback = 0;
+    }
 
     if ( trape->checkTurn() ){
       left = -1 * left;

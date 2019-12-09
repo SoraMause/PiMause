@@ -12,8 +12,6 @@
 #include <thread>
 #include "Interrupt.h"
 
-using namespace std;
-
 Mode *mode = new Mode();;
 Interrupt * interrupt = Interrupt::getInstance();
 
