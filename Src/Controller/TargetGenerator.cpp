@@ -68,31 +68,25 @@ void TargetGenerator::calcStepFrequency( float velocity )
 int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen_right, bool act, bool rotation)
 {
   float step_value = 0.0f;
-  if( act && !rotation && (store_velocity > 100.0f) && (sen_left.diff_3ms < 30 || sen_right.diff_3ms < 30) ){
-    if(sen_left.now > sen_left.threshold && sen_right.now > sen_right.threshold){
+  if( act && !rotation && (store_velocity > 100.0f) ){
+    if(sen_left.now > sen_left.threshold && sen_right.now > sen_right.threshold && sen_left.diff_3ms < 30 && sen_right.diff_3ms < 30){
       // 両壁があるとき
       step_value = (float)(sen_left.now-sen_left.reference) - (sen_right.now-sen_right.reference);
       step_value *= sensor_kp;
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
-    } else if(sen_left.now > sen_left.threshold){
-      #if 0
+    } else if(sen_left.now > sen_left.threshold && sen_left.diff_3ms < 10 ){
       // 左壁があるとき
       step_value = (float)(sen_left.now-sen_left.reference);
       step_value *= 2.0f * sensor_kp;
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
-      #endif
-      step_value = 0.0f;
-    } else if(sen_right.now > sen_right.threshold){
-      #if 0
+    } else if(sen_right.now > sen_right.threshold && sen_right.diff_3ms < 10 ){
       // 右壁があるとき
       step_value = (float)(sen_right.now-sen_right.reference);
       step_value *= -2.0f * sensor_kp;
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
-      #endif 
-      step_value = 0.0f;
     } else {
       step_value = 0.0f;
     } 
