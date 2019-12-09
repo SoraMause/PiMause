@@ -52,6 +52,7 @@ void TargetGenerator::calcStepFrequency( float velocity )
 {
   float frequency = 0.0f;
 
+  store_velocity = velocity;
   // v_step[step/sec] = v[mm/s] / d[mm/step]
   // v_step パルス周波数
   frequency = velocity / STEP_DISTANCE_CONST;
@@ -64,10 +65,10 @@ void TargetGenerator::calcStepFrequency( float velocity )
  * @param なし
  * @return　なし
 */
-int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen_right)
+int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen_right, bool act, bool rotation)
 {
   float step_value = 0.0f;
-  if( sen_left.diff_3ms < 100 || sen_right.diff_3ms < 100){
+  if( act && !rotation && (store_velocity > 100.0f) && (sen_left.diff_3ms < 100 || sen_right.diff_3ms < 100) ){
     if(sen_left.now > sen_left.threshold && sen_right.now > sen_right.threshold){
       // 両壁があるとき
       step_value = (float)(sen_left.now-sen_left.reference) - (sen_right.now-sen_right.reference);
@@ -87,8 +88,8 @@ int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
     } else {
-      step_sensor = 0;
-    }
+      step_value = 0.0f;
+    } 
   }
 
   step_sensor = (int16_t)step_value;

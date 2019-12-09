@@ -78,6 +78,7 @@ void Interrupt::processing()
     if(trape->status() == false){
       velocity = trape->getNextVelocity();
       target_trans->calcStepFrequency( velocity );
+      target_trans->clacSideSensorP(sen_left, sen_right, side_sensor_control, trape->checkTurn()); 
       target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
     } else {
       //std::printf("act\r");
@@ -85,13 +86,6 @@ void Interrupt::processing()
       right = 0;
     }
 
-    if(side_sensor_control && velocity > 100.0f){
-      side_sensor_feedback = target_trans->clacSideSensorP(sen_left, sen_right);
-      left -= side_sensor_feedback;
-      right += side_sensor_feedback;
-    } else {
-      side_sensor_feedback = 0;
-    }
 
     if(front_wall_control){
 

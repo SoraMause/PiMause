@@ -17,6 +17,7 @@ private:
 
   int step_vel = 0;
   int16_t step_sensor = 0.0f;
+  float store_velocity = 0.0f;
 
   // TIRE_RADIUS 48.0f
   // d[mm/step] = 48.0 * ( 0.9 * pi / 360)
@@ -38,7 +39,7 @@ public:
   void calcStepFrequency( float velocity );
 
   // センサの値からフィードバックする
-  int16_t clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen_right);
+  int16_t clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen_right, bool act, bool rotation);
 };
 
 
