@@ -212,9 +212,11 @@ void Mode::select()
         sensor->getWalldata(&exist);
         usleep(10);
         sensor->getWalldata(&exist);
+        next_dir = maze->getNextAction(&pos, &exist);
+        led->illuminate(next_dir);
         mtx.unlock();
         if( sw0 ) break;
-        next_dir = maze->getNextAction(&pos, &exist);
+        
         //mtx.lock();
         //std::printf("%d, %d, %d, %d\r\n", exist.front, exist.left, exist.right, next_dir); 
         //mtx.unlock();

@@ -231,6 +231,8 @@ uint8_t Maze::updateNextAction( Position *pos )
             && (map->getData(x, y, (East + direction) % 4))
             && (map->getData(x, y, (West + direction) % 4))) {
             nextdir = 2;
+        } else {
+          nextdir = 2;
         }
         temp_step = step[x + b][y - a];
     }
