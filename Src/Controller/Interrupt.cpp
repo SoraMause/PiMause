@@ -117,7 +117,7 @@ void Interrupt::sensorProcessing()
   while(1){
     mtx.lock();
     processing_start = std::chrono::system_clock::now();
-    sensor->get(&sen_front, &sen_left, &sen_right);
+    sensor->get(&sen_front, &sen_left, &sen_right, &exsit);
     processing_end = std::chrono::system_clock::now();
     mtx.unlock();
     double processing_time = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() );

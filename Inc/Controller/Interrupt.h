@@ -46,6 +46,8 @@ public:
   // sensor
   void sensorProcessing();
 
+  ExistWall getExistWall() const { return exsit; }
+
   // 横壁制御設定
   void setSideSensorControl(bool _flag)
   {
@@ -62,6 +64,7 @@ private:
   Sensor_Data sen_front;
   Sensor_Data sen_left;
   Sensor_Data sen_right;
+  ExistWall exsit;
   bool side_sensor_control = false;
   bool front_wall_control = false;
   int16_t side_sensor_feedback = 0;

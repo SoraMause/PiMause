@@ -42,16 +42,13 @@ public:
   static Sensor* getInstance();
 
   // センサの情報を返す
-  void get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right);
+  void get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real);
 
   // リファレンス値をセットする
   void setConstant(int reference, int threshold, int dir );
 
   // センサ値を表示
   void show();
-  
-  // 壁情報を取得
-  void getWalldata(ExistWall *real);
   
   // センサの処理を更新
   void update();

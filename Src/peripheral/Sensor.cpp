@@ -52,12 +52,13 @@ Sensor* Sensor::getInstance()
  * @return なし
  * @detail センサ関連の処理をしたのち、センサのデータを返す。
 */
-void Sensor::get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right)
+void Sensor::get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real)
 {
   update();
   *front = sen_front;
   *left = sen_left;
   *right = sen_right; 
+  *real = exist;
 }
 
 /**
@@ -193,9 +194,4 @@ void Sensor::updateDiff()
   sen_right.before_2ms = sen_right.before_1ms;
   sen_right.before_1ms = sen_right.now;
 
-}
-
-void Sensor::getWalldata(ExistWall *real)
-{
-  *real = exist;
 }
