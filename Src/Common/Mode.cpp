@@ -85,9 +85,9 @@ void Mode::select()
   gx = 1;
   gy = 0;
 
-  sensor->setConstant(1000, 150, Front);
-  sensor->setConstant(410, 150, Left);
-  sensor->setConstant(520, 160, Right);
+  sensor->setConstant(1000, 190, Front);
+  sensor->setConstant(410, 210, Left);
+  sensor->setConstant(520, 220, Right);
 
   bool sw0,sw1,sw2;
   int mode_count = 0;
@@ -206,15 +206,21 @@ void Mode::select()
       while( trape->status() == false );
         
       while(pos.x != goal_x || pos.y != goal_y){	
+        uint8_t wall_led = 0;
         mtx.lock();
         sw0 = sw->get0();
-        usleep(10);
-        sensor->getWalldata(&exist);
-        usleep(10);
-        sensor->getWalldata(&exist);
-        next_dir = maze->getNextAction(&pos, &exist);
-        led->illuminate(next_dir);
         mtx.unlock();
+        usleep(5000);
+        mtx.lock();
+        sensor->getWalldata(&exist);
+        if(exist.front) wall_led += 1;
+        if(exist.left) wall_led += 2;
+        if(exist.right) wall_led += 4;
+        led->illuminate(wall_led);
+        mtx.unlock();
+        sleep(1);
+        next_dir = maze->getNextAction(&pos, &exist);
+        
         if( sw0 ) break;
         
         //mtx.lock();
