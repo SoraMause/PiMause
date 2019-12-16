@@ -86,8 +86,8 @@ void Mode::select()
   gy = 0;
 
   sensor->setConstant(1000, 190, Front);
-  sensor->setConstant(380, 210, Left);
-  sensor->setConstant(500, 220, Right);
+  sensor->setConstant(410, 210, Left);
+  sensor->setConstant(520, 220, Right);
 
   bool sw0,sw1,sw2;
   int mode_count = 0;
