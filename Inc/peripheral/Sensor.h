@@ -50,6 +50,9 @@ public:
   // センサ値を表示
   void show();
   
+  // 壁情報を取得
+  void getWalldata(ExistWall *real);
+  
   // センサの処理を更新
   void update();
 

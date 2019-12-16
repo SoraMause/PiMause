@@ -195,3 +195,8 @@ void Sensor::updateDiff()
   sen_right.before_1ms = sen_right.now;
 
 }
+
+void Sensor::getWalldata(ExistWall *real)
+{
+  *real = exist;
+}

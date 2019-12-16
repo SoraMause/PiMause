@@ -209,18 +209,15 @@ void Mode::select()
         usleep(5500);
         mtx.lock();
         sw0 = sw->get0();
-        exist = interrupt->getExistWall();
         mtx.unlock();
-        usleep(5500);
-        mtx.lock();
-        sw0 = sw->get0();
-        exist = interrupt->getExistWall();
-        mtx.unlock();
-        usleep(5500);
-        mtx.lock();
-        sw0 = sw->get0();
-        exist = interrupt->getExistWall();
-        mtx.unlock();
+
+        for(int i = 0; i < 10; i++ ){
+          mtx.lock();
+          sensor->update();
+          sensor->getWalldata(&exist);
+          mtx.unlock();
+        }
+
         if( sw0 ) break;
         next_dir = maze->getNextAction(&pos, &exist);
         //mtx.lock();
