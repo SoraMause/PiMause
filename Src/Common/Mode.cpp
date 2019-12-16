@@ -86,8 +86,8 @@ void Mode::select()
   gy = 0;
 
   sensor->setConstant(1000, 190, Front);
-  sensor->setConstant(410, 190, Left);
-  sensor->setConstant(520, 210, Right);
+  sensor->setConstant(410, 210, Left);
+  sensor->setConstant(520, 220, Right);
 
   bool sw0,sw1,sw2;
   int mode_count = 0;
@@ -210,11 +210,8 @@ void Mode::select()
         sw0 = sw->get0();
         exist = interrupt->getExistWall();
         mtx.unlock();
-
-        next_dir = maze->getNextAction(&pos, &exist);
-        
         if( sw0 ) break;
-        
+        next_dir = maze->getNextAction(&pos, &exist);
         //mtx.lock();
         //std::printf("%d, %d, %d, %d\r\n", exist.front, exist.left, exist.right, next_dir); 
         //mtx.unlock();
@@ -250,6 +247,7 @@ void Mode::select()
           interrupt->setSideSensorControl(false);
           maze->updatePosition(&pos, next_dir);
         } else if( next_dir == Rear){
+          #if 0
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           interrupt->setSideSensorControl(true);
           while( trape->status() == false );
@@ -263,6 +261,11 @@ void Mode::select()
           while( trape->status() == false );
           interrupt->setSideSensorControl(false);
           maze->updatePosition(&pos, next_dir);
+          #endif
+          mtx.lock();
+          led->illuminate(0x0f);
+          sleep(10);
+          mtx.unlock();
         }
       }
       trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
