@@ -208,8 +208,8 @@ uint8_t Maze::updateNextAction( Position *pos )
     uint16_t temp_step = 0;
     uint8_t nextdir = 0;
     uint8_t direction = pos->direction;
-    uint8_t x = pos->x;
-    uint8_t y = pos->y;
+    int8_t x = pos->x;
+    int8_t y = pos->y;
     int8_t a = 0, b = 0;
 
     if (direction == North) {

@@ -208,9 +208,9 @@ void Mode::select()
       while(pos.x != goal_x || pos.y != goal_y){	
         mtx.lock();
         sw0 = sw->get0();
+        sensor->getWalldata(&exist);
         mtx.unlock();
         if( sw0 ) break;
-        sensor->getWalldata(&exist);
         next_dir = maze->getNextAction(&pos, &exist);
         //mtx.lock();
         //std::printf("%d, %d, %d, %d\r\n", exist.front, exist.left, exist.right, next_dir); 

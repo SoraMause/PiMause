@@ -73,7 +73,6 @@ void Interrupt::processing()
   while( 1 ){
     mtx.lock();
     processing_start = std::chrono::system_clock::now();
-    mtx.unlock();
     
     if(trape->status() == false){
       velocity = trape->getNextVelocity();
@@ -86,12 +85,7 @@ void Interrupt::processing()
       right = 0;
     }
 
-
-    if(front_wall_control){
-
-    } else {
-      front_wall_feedback = 0;
-    }
+    mtx.unlock();
 
     if ( trape->checkTurn() ){
       left = -1 * left;
