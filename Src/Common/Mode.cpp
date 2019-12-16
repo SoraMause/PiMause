@@ -211,7 +211,7 @@ void Mode::select()
         sw0 = sw->get0();
         mtx.unlock();
 
-        for(int i = 0; i < 10; i++ ){
+        for(int i = 0; i < 100; i++ ){
           mtx.lock();
           sensor->update();
           sensor->getWalldata(&exist);
