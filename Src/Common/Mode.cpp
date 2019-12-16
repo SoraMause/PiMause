@@ -208,6 +208,9 @@ void Mode::select()
       while(pos.x != goal_x || pos.y != goal_y){	
         mtx.lock();
         sw0 = sw->get0();
+        usleep(10);
+        sensor->getWalldata(&exist);
+        usleep(10);
         sensor->getWalldata(&exist);
         mtx.unlock();
         if( sw0 ) break;
