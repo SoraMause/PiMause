@@ -206,7 +206,17 @@ void Mode::select()
       while( trape->status() == false );
         
       while(pos.x != goal_x || pos.y != goal_y){	
-        usleep(5000);
+        usleep(5500);
+        mtx.lock();
+        sw0 = sw->get0();
+        exist = interrupt->getExistWall();
+        mtx.unlock();
+        usleep(5500);
+        mtx.lock();
+        sw0 = sw->get0();
+        exist = interrupt->getExistWall();
+        mtx.unlock();
+        usleep(5500);
         mtx.lock();
         sw0 = sw->get0();
         exist = interrupt->getExistWall();
