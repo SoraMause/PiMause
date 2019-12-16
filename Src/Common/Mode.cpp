@@ -206,12 +206,11 @@ void Mode::select()
       while( trape->status() == false );
         
       while(pos.x != goal_x || pos.y != goal_y){	
+        usleep(5000);
         mtx.lock();
         sw0 = sw->get0();
         exist = interrupt->getExistWall();
-        if(exist.front && exist.left && exist.right ) led->illuminate(0x07);
         mtx.unlock();
-        
         if( sw0 ) break;
         next_dir = maze->getNextAction(&pos, &exist);
         //mtx.lock();

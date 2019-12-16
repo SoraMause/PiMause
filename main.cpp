@@ -25,11 +25,6 @@ void interrupt_run()
   interrupt->processing();
 }
 
-void sensor_run()
-{
-  interrupt->sensorProcessing();
-}
-
 int main()
 {
  
@@ -37,11 +32,9 @@ int main()
   mause->peripheral_init();
   std::thread th_a(mode_run);
   std::thread th_b(interrupt_run);
-  std::thread th_c(sensor_run);
 
   th_a.join();
   th_b.join();
-  th_c.join();
   
   return 0;
 }

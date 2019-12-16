@@ -43,9 +43,6 @@ public:
   // 処理を行う
   void processing();
 
-  // sensor
-  void sensorProcessing();
-
   ExistWall getExistWall() const { return exsit; }
 
   // 横壁制御設定
