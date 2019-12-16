@@ -77,7 +77,7 @@ void Interrupt::processing()
     if(trape->status() == false){
       velocity = trape->getNextVelocity();
       target_trans->calcStepFrequency( velocity );
-      target_trans->clacSideSensorP(sen_left, sen_right, side_sensor_control, trape->checkTurn()); 
+      //target_trans->clacSideSensorP(sen_left, sen_right, side_sensor_control, trape->checkTurn()); 
       target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
     } else {
       //std::printf("act\r");
@@ -121,7 +121,7 @@ void Interrupt::sensorProcessing()
     processing_end = std::chrono::system_clock::now();
     mtx.unlock();
     double processing_time = static_cast<double>(std::chrono::duration_cast<std::chrono::microseconds>(processing_end - processing_start).count() );
-    uint32_t wait_time = (uint32_t)( 2000 - processing_time );
+    uint32_t wait_time = (uint32_t)( 5000 - processing_time );
     usleep( wait_time );
   }
 }
