@@ -99,6 +99,7 @@ int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen
       else if(step_value < -100) step_value = -100.0f;
     } else {
       step_value = 0.0f;
+      step_diff = 0.0f;
     } 
   }
 
