@@ -93,7 +93,7 @@ int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen
       step_value = (float)(sen_right.now-sen_right.reference);
       step_d = (step_value - step_diff) * sensor_kd;
       step_value *= -2.0 * sensor_kp;
-      step_value += step_d;
+      step_value -= step_d;
       step_diff = step_value;
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
