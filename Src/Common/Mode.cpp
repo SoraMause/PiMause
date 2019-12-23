@@ -214,8 +214,8 @@ void Mode::select()
         for(int i = 0; i < 100; i++ ){
           mtx.lock();
           sensor->update();
-          sensor->getWalldata(&exist);
           mtx.unlock();
+          sensor->getWalldata(&exist);
         }
 
         if( sw0 ) break;
