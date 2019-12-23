@@ -71,6 +71,7 @@ Interrupt* Interrupt::getInstance()
 void Interrupt::processing()
 {
   while( 1 ){
+    int16_t front_val = 0;
     mtx.lock();
     processing_start = std::chrono::system_clock::now();
     sensor->get(&sen_front, &sen_left, &sen_right, &exsit);
@@ -80,6 +81,7 @@ void Interrupt::processing()
       target_trans->calcStepFrequency( velocity );
       target_trans->clacSideSensorP(sen_left, sen_right, side_sensor_control, trape->checkTurn()); 
       target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
+      front_val = target_trans->calcFrontWallSensor(sen_front);
     } else {
       //std::printf("act\r");
       left = 0;
@@ -93,6 +95,8 @@ void Interrupt::processing()
     }
 
     mtx.lock();
+    left += front_val;
+    right += front_val;
     motor->control( left, right );
     processing_end = std::chrono::system_clock::now();
     mtx.unlock();
