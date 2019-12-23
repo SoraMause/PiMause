@@ -238,6 +238,12 @@ void Mode::select()
           interrupt->setSideSensorControl(false);
           trape->makeTrapezoid( TURN_90, 2000.0f, 300.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
+
+          trape->makeTrapezoid( -10.0f, 2000.0f, 100.0f, 0.0f, 0.0f, false );
+          while( trape->status() == false );
+          trape->makeTrapezoid( 10.0f, 2000.0f, 100.0f, 0.0f, 0.0f, false );
+          while( trape->status() == false );
+
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           interrupt->setSideSensorControl(true);
           while( trape->status() == false );
@@ -250,6 +256,12 @@ void Mode::select()
           interrupt->setSideSensorControl(false);
           trape->makeTrapezoid( -TURN_90, 2000.0f, 300.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
+
+          trape->makeTrapezoid( -10.0f, 2000.0f, 100.0f, 0.0f, 0.0f, false );
+          while( trape->status() == false );
+          trape->makeTrapezoid( 10.0f, 2000.0f, 100.0f, 0.0f, 0.0f, false );
+          while( trape->status() == false );
+
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           interrupt->setSideSensorControl(true);
           while( trape->status() == false );
@@ -264,6 +276,12 @@ void Mode::select()
           while( trape->status() == false );
           trape->makeTrapezoid( TURN_90, 2000.0f, 300.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
+
+          trape->makeTrapezoid( -10.0f, 2000.0f, 100.0f, 0.0f, 0.0f, false );
+          while( trape->status() == false );
+          trape->makeTrapezoid( 10.0f, 2000.0f, 100.0f, 0.0f, 0.0f, false );
+          while( trape->status() == false );
+
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           interrupt->setSideSensorControl(true);
           while( trape->status() == false );
