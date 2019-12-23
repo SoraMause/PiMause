@@ -70,26 +70,23 @@ int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen
   float step_value = 0.0f;
   float step_d = 0.0f;
   if( act && !rotation && (store_velocity > 100.0f) ){
-    if(sen_left.now > sen_left.threshold && sen_right.now > sen_right.threshold && sen_left.diff_1ms < 30 && sen_right.diff_1ms < 25){
+    if(sen_left.now > sen_left.threshold && sen_right.now > sen_right.threshold && sen_left.diff_1ms < 30 && sen_right.diff_1ms < 20){
       // 両壁があるとき
-      step_value = (float)(sen_left.now-sen_left.reference) - (sen_right.now-sen_right.reference);
+      step_value = (float)sensor_kp * ( (sen_left.now-sen_left.reference) - (sen_right.now-sen_right.reference));
       step_d = (step_value - step_diff) * sensor_kd;
-      step_value *= sensor_kp;
+      step_diff = step_value;
       step_value += step_d;
-      step_diff = step_value;
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
-    } else if(sen_left.now > sen_left.threshold && sen_left.diff_1ms < 25 ){
+    } else if(sen_left.now > sen_left.threshold && sen_left.diff_1ms < 20 ){
       // 左壁があるとき
-      step_value = (float)(sen_left.now-sen_left.reference);
-      step_value *= 2.0 * sensor_kp;
+      step_value = (float)-2.0 * sensor_kp * (sen_left.now-sen_left.reference);
       step_diff = step_value;
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
-    } else if(sen_right.now > sen_right.threshold && sen_right.diff_1ms < 15 ){
+    } else if(sen_right.now > sen_right.threshold && sen_right.diff_1ms < 10 ){
       // 右壁があるとき
-      step_value = (float)(sen_right.now-sen_right.reference);
-      step_value *= -2.0 * sensor_kp;
+      step_value = (float) -2.0 * sensor_kp *(sen_right.now-sen_right.reference);
       step_diff = step_value;
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
