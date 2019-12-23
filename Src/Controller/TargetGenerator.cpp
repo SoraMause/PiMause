@@ -103,10 +103,10 @@ int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen
   return step_sensor;
 }
 
-int16_t TargetGenerator::calcFrontWallSensor(Sensor_Data& sen_front)
+int16_t TargetGenerator::calcFrontWallSensor(Sensor_Data& sen_front, bool act, float now_val)
 {
   float step_value = 0.0f;
-  if(sen_front.now > 800){
+  if(sen_front.now > 800 && !act && now_val >= 0.0f){
     step_value = (sen_front.reference - sen_front.now) * front_kp;
   }
   return step_value;

@@ -81,7 +81,7 @@ void Interrupt::processing()
       target_trans->calcStepFrequency( velocity );
       target_trans->clacSideSensorP(sen_left, sen_right, side_sensor_control, trape->checkTurn()); 
       target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
-      front_val = target_trans->calcFrontWallSensor(sen_front);
+      front_val = target_trans->calcFrontWallSensor(sen_front,trape->checkTurn(), velocity);
     } else {
       //std::printf("act\r");
       left = 0;
