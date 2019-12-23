@@ -44,7 +44,7 @@ public:
   // センサの値からフィードバックする
   int16_t clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen_right, bool act, bool rotation);
 
-  int16_t calcFrontWallSensor(Sensor_Data& sen_front, bool act, float now_val);
+  int16_t calcFrontWallSensor(Sensor_Data& sen_front, bool act, float now_val, bool control);
 };
 
 
