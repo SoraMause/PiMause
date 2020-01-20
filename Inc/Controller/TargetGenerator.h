@@ -25,7 +25,7 @@ private:
   #define STEP_DISTANCE_CONST 0.37699111843 
 
   #define sensor_kp 0.30f
-  #define sensor_kd 0.30f
+  #define sensor_kd 1.0f
   #define front_kp 0.25f
 
 public:
