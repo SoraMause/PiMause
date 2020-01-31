@@ -140,7 +140,6 @@ bool Trapezoid::travelDirection()
  * @brief ターンかどうか返す
  * @param なし
  * @return　なし
- * @detail 前 false 後ろ true
 */
 bool Trapezoid::checkTurn()
 {
