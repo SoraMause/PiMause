@@ -35,8 +35,8 @@ void TargetGenerator::getStepFrequency( int *left, int *right, bool back_right )
 {
   // step_sensorの足し引きは暫定
   if ( back_right ){
-    *left += -1 * (step_vel - step_sensor);
-    *right += -1 * (step_vel + step_sensor);
+    *left += -1 * (step_vel - step_sensor + step_front_sensor);
+    *right += -1 * (step_vel + step_sensor + step_front_sensor);
   } else {
     *left += step_vel + step_sensor;
     *right += step_vel - step_sensor;
@@ -98,4 +98,15 @@ int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen
 
   step_sensor = (int16_t)step_value;
   return step_sensor;
+}
+
+int16_t TargetGenerator::calcFrontSensorP(Sensor_Data &sen_front, bool act)
+{
+  float front_control_val = 0.0f;
+  if(act && (store_velocity > 100 && store_velocity < 300.0f) && sen_front.now > 800){
+    front_control_val = (float)front_kp * (sen_front.now - sen_front.reference);
+  } 
+
+  step_front_sensor = (int16_t)front_control_val;
+  return step_front_sensor;
 }

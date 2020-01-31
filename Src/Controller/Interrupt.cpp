@@ -79,6 +79,7 @@ void Interrupt::processing()
       velocity = trape->getNextVelocity();
       target_trans->calcStepFrequency( velocity );
       target_trans->clacSideSensorP(sen_left, sen_right, side_sensor_control, trape->checkTurn()); 
+      target_trans->calcFrontSensorP(sen_front, trape->checkTurn());
       target_trans->getStepFrequency( &left, &right, trape->travelDirection() );    
     } else {
       //std::printf("act\r");

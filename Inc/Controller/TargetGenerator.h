@@ -16,17 +16,18 @@ private:
   Trapezoid *trape;
 
   int step_vel = 0;
-  int16_t step_sensor = 0.0f;
+  int16_t step_sensor = 0;
+  int16_t step_front_sensor = 0;
   float store_velocity = 0.0f;
   float step_diff = 0.0f;
 
   // TIRE_RADIUS 48.0f
   // d[mm/step] = 48.0 * ( 0.9 * pi / 360)
-  #define STEP_DISTANCE_CONST 0.37699111843 
+  #define STEP_DISTANCE_CONST 0.37699111843f 
 
   #define sensor_kp 0.30f
   #define sensor_kd 1.0f
-  #define front_kp 0.25f
+  #define front_kp 1.0f
 
 public:
   // コンストラクタ
@@ -43,6 +44,9 @@ public:
 
   // センサの値からフィードバックする
   int16_t clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen_right, bool act, bool rotation);
+
+  // 前壁制御をする
+  int16_t calcFrontSensorP(Sensor_Data &sen_front, bool act);
 
 };
 
