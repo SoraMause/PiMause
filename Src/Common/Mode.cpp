@@ -82,8 +82,8 @@ void Mode::init()
 void Mode::select()
 {
   init();
-  gx = 3;
-  gy = 3;
+  gx = 7;
+  gy = 7;
 
   sensor->setConstant(1000, 120, Front);
   sensor->setConstant(495, 140, Left);

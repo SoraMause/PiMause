@@ -103,7 +103,7 @@ int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen
 int16_t TargetGenerator::calcFrontSensorP(Sensor_Data &sen_front, bool act)
 {
   float front_control_val = 0.0f;
-  if(!act && (store_velocity > 10 && store_velocity < 300.0f) && sen_front.now > 600){
+  if(!act && (store_velocity > 10 && store_velocity < 300.0f) && sen_front.now > 300){
     front_control_val = (float)front_kp * (sen_front.now - sen_front.reference);
   } 
 
