@@ -261,9 +261,7 @@ void Mode::select()
           interrupt->setSideSensorControl(true);
           while( trape->status() == false );
           interrupt->setSideSensorControl(false);
-          trape->makeTrapezoid( TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
-          while( trape->status() == false );
-          trape->makeTrapezoid( TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
+          trape->makeTrapezoid( TURN_180, 1000.0f, 200.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           interrupt->setSideSensorControl(true);
@@ -282,6 +280,10 @@ void Mode::select()
     } else if(mode_count == 7){
       sleep(1);
       trape->makeTrapezoid( TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
+      while( trape->status() == false );
+    } else if(mode_count == 8){
+      sleep(1);
+      trape->makeTrapezoid( TURN_180, 1000.0f, 200.0f, 0.0f, 0.0f, true );
       while( trape->status() == false );
     }
     mode_count = 0;

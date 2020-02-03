@@ -37,6 +37,7 @@ public:
   #define ONE_BLOCK 180.0f
   #define HALF_BLOCK 90.0f
   #define TURN_90 72.6f
+  #define TURN_180 144.8f
 
   // コンストラクタ
   Trapezoid();
