@@ -78,13 +78,13 @@ int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen
       step_value += step_d;
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
-    } else if(sen_left.now > sen_left.threshold && sen_left.diff_1ms < 10 && sen_right.diff_1ms < 20 ){
+    } else if(sen_left.now > sen_left.threshold && sen_left.diff_1ms < 10 && sen_right.diff_1ms < 10 ){
       // 左壁があるとき
       step_value = (float)sensor_kp * (sen_left.now-sen_left.reference);
       step_diff = step_value;
       if(step_value > 100) step_value = 100.0f;
       else if(step_value < -100) step_value = -100.0f;
-    } else if(sen_right.now > sen_right.threshold && sen_right.diff_1ms < 10 && sen_left.diff_1ms < 20 ){
+    } else if(sen_right.now > sen_right.threshold && sen_right.diff_1ms < 10 && sen_left.diff_1ms < 10 ){
       // 右壁があるとき
       step_value = (float)-sensor_kp *(sen_right.now-sen_right.reference);
       step_diff = step_value;
