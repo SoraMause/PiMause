@@ -257,16 +257,16 @@ void Mode::select()
           interrupt->setSideSensorControl(false);
         } else if( next_dir == Rear){
           maze->updatePosition(&pos, next_dir);
-          trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
-          interrupt->setSideSensorControl(true);
-          while( trape->status() == false );
+          //trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+          //interrupt->setSideSensorControl(true);
+          //while( trape->status() == false );
           interrupt->setSideSensorControl(false);
           trape->makeTrapezoid( TURN_180, 1000.0f, 200.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
-          trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
-          interrupt->setSideSensorControl(true);
-          while( trape->status() == false );
-          interrupt->setSideSensorControl(false);
+          //trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
+          //interrupt->setSideSensorControl(true);
+          //while( trape->status() == false );
+          //interrupt->setSideSensorControl(false);
         }
       }
       trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
