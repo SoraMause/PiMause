@@ -421,6 +421,7 @@ void Map::loadWall()
     std::fscanf(fp, "%d", &wall.vertical_known[i]);
   }
   
+  std::printf("wall 0 horizontal", wall.horizontal[0]);
 
   fclose(fp);
   
