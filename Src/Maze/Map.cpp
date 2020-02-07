@@ -326,7 +326,6 @@ bool Map::checkWall(uint8_t x, uint8_t y)
     uint16_t check_wall = 1;
     bool check = false;
 
-
     // north
     check_wall <<= x;
     check_wall &= wall.horizontal_knwon[y + 1];
@@ -366,6 +365,7 @@ void Map::storeWall()
 {
   std::FILE *fp;
   fp = std::fopen("maze.txt", "w");
+  fprintf(fp,"dummy");
   for (int i = 0; i < 17; i++)
   {
     std::fprintf(fp, "%d\n", wall.horizontal[i]);
@@ -396,10 +396,13 @@ void Map::loadWall()
   fp = std::fopen("maze.txt", "r");
 
   if(fp == NULL){
-    printf("maze.txt not found\n");
+    std::printf("maze.txt not found\n");
     return;
   }
 
+  char dummy[6];
+  std::fscanf(fp ,"%s", dummy);
+  std::printf("%s", dummy);
   for(int i = 0; i < 17; i++){
     std::fscanf(fp, "%d", &wall.horizontal[i]);
   }
