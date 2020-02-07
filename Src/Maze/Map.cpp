@@ -366,8 +366,8 @@ void Map::storeWall()
 {
 
   // 未探索の場所に壁をいれる
-  for(int x = 0; x < 16; x++){
-    for(int y = 0; y < 16; y++){
+  for(int x = 1; x < 15; x++){
+    for(int y = 1; y < 15; y++){
       bool n,s,w,e;
       uint16_t check_wall = 1;
 
