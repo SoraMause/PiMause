@@ -129,9 +129,7 @@ void Mode::select()
     if( mode_count == 0){
       Position pos;
       pos.init();
-      mtx.lock();
       maze->show( pos );
-      mtx.unlock();
     } else if( mode_count == 1){
       while( 1 ){
         mtx.lock();

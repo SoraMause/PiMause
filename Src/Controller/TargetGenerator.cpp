@@ -69,7 +69,7 @@ int16_t TargetGenerator::clacSideSensorP(Sensor_Data& sen_left, Sensor_Data& sen
 {
   float step_value = 0.0f;
   float step_d = 0.0f;
-  if( act && !rotation && (store_velocity > 150.0f) ){
+  if( act && !rotation && (store_velocity > 50.0f) ){
     if(sen_left.now > sen_left.threshold && sen_right.now > sen_right.threshold && sen_left.diff_1ms < 10 && sen_right.diff_1ms < 10){
       // 両壁があるとき
       step_value = (float)sensor_kp * ( (sen_left.now-sen_left.reference) - (sen_right.now-sen_right.reference));
