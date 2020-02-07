@@ -129,6 +129,7 @@ void Mode::select()
     if( mode_count == 0){
       Position pos;
       pos.init();
+      maze->setGoal(gx, gy);
       maze->show( pos );
     } else if( mode_count == 1){
       while( 1 ){
