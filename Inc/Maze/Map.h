@@ -58,6 +58,12 @@ public:
   // 探索したかどうかを確認
   bool checkWall( uint8_t x, uint8_t y );
 
+  // 壁を保存する
+  void storeWall();
+
+  // 壁を読み込む
+  void loadWall();
+
 private:
   // 東西南北の壁の追加、削除
   void manegeNorthWall( uint8_t x, uint8_t y, bool exist );

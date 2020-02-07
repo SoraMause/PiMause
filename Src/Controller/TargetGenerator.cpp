@@ -104,7 +104,7 @@ int16_t TargetGenerator::calcFrontSensorP(Sensor_Data &sen_front, bool act)
 {
   float front_control_val = 0.0f;
   if(!act && (store_velocity > 10 && store_velocity < 300.0f) && sen_front.now > 300){
-    front_control_val = (float)front_kp * (sen_front.reference - sen_front.now);
+    front_control_val = (float)front_kp * (sen_front.now-sen_front.reference);
   } 
 
   step_front_sensor = (int16_t)front_control_val;

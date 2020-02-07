@@ -82,8 +82,8 @@ void Mode::init()
 void Mode::select()
 {
   init();
-  gx = 7;
-  gy = 7;
+  gx = 3;
+  gy = 3;
 
   sensor->setConstant(1000, 120, Front);
   sensor->setConstant(495, 140, Left);
@@ -271,6 +271,8 @@ void Mode::select()
       }
       trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
       while( trape->status() == false );
+
+      maze->storeWall();
     } else if(mode_count == 6){
       sleep(1);
       trape->makeTrapezoid( 360.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
@@ -282,9 +284,7 @@ void Mode::select()
       trape->makeTrapezoid( TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
       while( trape->status() == false );
     } else if(mode_count == 8){
-      sleep(1);
-      trape->makeTrapezoid( TURN_180, 1000.0f, 200.0f, 0.0f, 0.0f, true );
-      while( trape->status() == false );
+      /* 最短走行追加 */
     }
     mode_count = 0;
   } 

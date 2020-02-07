@@ -327,6 +327,8 @@ void Maze::show( Position pos )
 {
   int x,y;
 
+  loadWall();
+
   updateStepMap();
 
   mtx.lock();
@@ -397,5 +399,19 @@ void Maze::show( Position pos )
 
   std::printf("\r\n");
 
+  mtx.unlock();
+}
+
+void Maze::storeWall()
+{
+  mtx.lock();
+  map->storeWall();
+  mtx.unlock();
+}
+
+void Maze::loadWall()
+{
+  mtx.lock();
+  map->loadWall();
   mtx.unlock();
 }

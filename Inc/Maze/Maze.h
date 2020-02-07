@@ -96,6 +96,11 @@ public:
   // 歩数マップと壁情報を表示する
   void show( Position pos);
 
+  // 迷路をtxtに保存
+  void storeWall();
+
+  // 迷路をtxtから読み出し
+  void loadWall();
 
 private:
   // 歩数マップを更新
