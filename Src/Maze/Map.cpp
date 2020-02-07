@@ -364,47 +364,6 @@ bool Map::checkWall(uint8_t x, uint8_t y)
 
 void Map::storeWall()
 {
-
-  // 未探索の場所に壁をいれる
-  for(int x = 0; x < 16; x++){
-    for(int y = 0; y < 16; y++){
-      bool n,s,w,e;
-      uint16_t check_wall = 1;
-
-      // north
-      check_wall <<= x;
-      check_wall &= wall.horizontal_knwon[y + 1];
-      if (check_wall != 0) n = true;
-      else n = false;
-      check_wall = 1;
-
-      // east
-      check_wall <<= y;
-      check_wall &= wall.vertical_known[x + 1];
-      if (check_wall != 0) e = true;
-      else e = false;
-      check_wall = 1;
-
-      // south
-      check_wall <<= x;
-      check_wall &= wall.horizontal_knwon[y];
-      if (check_wall != 0) s = true;
-      else s = false;
-      check_wall = 1;
-
-      // west
-      check_wall <<= y;
-      check_wall &= wall.vertical_known[x];
-      if (check_wall != 0) w = true;
-      else w = false;
-
-      if(!n) manegeNorthWall(x, y, true);
-      if(!s) manegeSouthWall(x, y, true);
-      if(!w) manegeWestWall(x, y, true);
-      if(!e) manegeEastWall(x, y, true);
-    }
-  }
-
   std::FILE *fp;
   fp = std::fopen("maze.txt", "w");
   for (int i = 0; i < 17; i++)

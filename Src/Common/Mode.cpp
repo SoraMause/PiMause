@@ -98,7 +98,7 @@ void Mode::select()
       sw0 = sw->get0();
       sw1 = sw->get1();
       sw2 = sw->get2();
-      std::printf("sw0 : %d, sw1 : %d, sw2 : %d\r\n",sw0, sw1, sw2 );
+      std::printf("sw0 : %d, sw1 : %d, sw2 : %d\r",sw0, sw1, sw2 );
       mtx.unlock();
 
       if ( sw0 ){
