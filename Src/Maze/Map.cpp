@@ -376,6 +376,16 @@ void Map::storeWall()
     std::fprintf(fp, "%d\n", wall.vertical[i]);
   };
 
+  for (int i = 0; i < 17; i++)
+  {
+    std::fprintf(fp, "%d\n", wall.horizontal_knwon[i]);
+  }
+
+  for (int i = 0; i < 17; i++)
+  {
+    std::fprintf(fp, "%d\n", wall.vertical_known[i]);
+  };
+
   std::fclose(fp);
 
 }
@@ -396,6 +406,14 @@ void Map::loadWall()
 
   for(int i = 0; i < 17; i++){
     std::fscanf(fp, "%d", &wall.vertical[i]);
+  }
+
+  for(int i = 0; i < 17; i++){
+    std::fscanf(fp, "%d", &wall.horizontal_knwon[i]);
+  }
+
+  for(int i = 0; i < 17; i++){
+    std::fscanf(fp, "%d", &wall.vertical_known[i]);
   }
 
   fclose(fp);
