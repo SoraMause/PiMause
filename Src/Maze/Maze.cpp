@@ -327,7 +327,7 @@ void Maze::show( Position pos )
 {
   int x,y;
 
-  //loadWall();
+  loadWall();
 
   updateStepMap();
 

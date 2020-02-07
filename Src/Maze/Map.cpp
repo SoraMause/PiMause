@@ -406,6 +406,7 @@ void Map::loadWall()
   for(int i = 0; i < 17; i++){
     std::fscanf(fp, "%d", &wall.horizontal[i]);
   }
+  wall.horizontal[0] = 0xffff;
 
   for(int i = 0; i < 17; i++){
     std::fscanf(fp, "%d", &wall.vertical[i]);
@@ -414,10 +415,12 @@ void Map::loadWall()
   for(int i = 0; i < 17; i++){
     std::fscanf(fp, "%d", &wall.horizontal_knwon[i]);
   }
+  wall.horizontal_knwon[0] = 0xffff;
 
   for(int i = 0; i < 17; i++){
     std::fscanf(fp, "%d", &wall.vertical_known[i]);
   }
+  
 
   fclose(fp);
   
