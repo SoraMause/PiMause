@@ -326,6 +326,7 @@ bool Map::checkWall(uint8_t x, uint8_t y)
     uint16_t check_wall = 1;
     bool check = false;
 
+
     // north
     check_wall <<= x;
     check_wall &= wall.horizontal_knwon[y + 1];
@@ -363,28 +364,62 @@ bool Map::checkWall(uint8_t x, uint8_t y)
 
 void Map::storeWall()
 {
+
+  // 未探索の場所に壁をいれる
+  for(int x = 0; x < 16; x++){
+    for(int y = 0; y < 16; y++){
+      bool n,s,w,e;
+      uint16_t check_wall = 1;
+
+      // north
+      check_wall <<= x;
+      check_wall &= wall.horizontal_knwon[y + 1];
+      if (check_wall != 0) n = true;
+      else n = false;
+      check_wall = 1;
+
+      // east
+      check_wall <<= y;
+      check_wall &= wall.vertical_known[x + 1];
+      if (check_wall != 0) e = true;
+      else e = false;
+      check_wall = 1;
+
+      // south
+      check_wall <<= x;
+      check_wall &= wall.horizontal_knwon[y];
+      if (check_wall != 0) s = true;
+      else s = false;
+      check_wall = 1;
+
+      // west
+      check_wall <<= y;
+      check_wall &= wall.vertical_known[x];
+      if (check_wall != 0) w = true;
+      else w = false;
+
+      if(!n) manegeNorthWall(x, y, true);
+      if(!s) manegeSouthWall(x, y, true);
+      if(!w) manegeWestWall(x, y, true);
+      if(!e) manegeEastWall(x, y, true);
+    }
+  }
+
   std::FILE *fp;
   fp = std::fopen("maze.txt", "w");
-  fprintf(fp,"dummy\n");
   for (int i = 0; i < 17; i++)
   {
-    std::fprintf(fp, "%d\n", wall.horizontal[i]);
+    std::fprintf(fp, "%d ", wall.horizontal[i]);
   }
 
-  for (int i = 0; i < 17; i++)
-  {
-    std::fprintf(fp, "%d\n", wall.vertical[i]);
-  };
+  std::fprintf(fp, "\n");
 
   for (int i = 0; i < 17; i++)
   {
-    std::fprintf(fp, "%d\n", wall.horizontal_knwon[i]);
-  }
-
-  for (int i = 0; i < 17; i++)
-  {
-    std::fprintf(fp, "%d\n", wall.vertical_known[i]);
+    std::fprintf(fp, "%d ", wall.vertical[i]);
   };
+
+  std::fprintf(fp, "\n");
 
   std::fclose(fp);
 
@@ -396,32 +431,29 @@ void Map::loadWall()
   fp = std::fopen("maze.txt", "r");
 
   if(fp == NULL){
-    std::printf("maze.txt not found\n");
+    printf("maze.txt not found\n");
     return;
   }
 
-  char dummy[10];
-  std::fscanf(fp ,"%s", dummy);
-  std::printf("%s", dummy);
-  for(int i = 0; i < 17; i++){
-    std::fscanf(fp, "%d", &wall.horizontal[i]);
-  }
-  wall.horizontal[0] = 0xffff;
+  int horizontal[17];
+  int vertical[17];
 
-  for(int i = 0; i < 17; i++){
-    std::fscanf(fp, "%d", &wall.vertical[i]);
-  }
+  std::fscanf(fp, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", 
+  &horizontal[0],&horizontal[1],&horizontal[2],&horizontal[3],
+  &horizontal[4],&horizontal[5],&horizontal[6],&horizontal[7],
+  &horizontal[8],&horizontal[9],&horizontal[10],&horizontal[11],
+  &horizontal[12],&horizontal[13],&horizontal[14],&horizontal[15],&horizontal[16]);
 
-  for(int i = 0; i < 17; i++){
-    std::fscanf(fp, "%d", &wall.horizontal_knwon[i]);
-  }
-  wall.horizontal_knwon[0] = 0xffff;
-
-  for(int i = 0; i < 17; i++){
-    std::fscanf(fp, "%d", &wall.vertical_known[i]);
-  }
+  std::fscanf(fp, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", 
+  &vertical[0],&vertical[1],&vertical[2],&vertical[3],
+  &vertical[4],&vertical[5],&vertical[6],&vertical[7],
+  &vertical[8],&vertical[9],&vertical[10],&vertical[11],
+  &vertical[12],&vertical[13],&vertical[14],&vertical[15],&vertical[16]);
   
-  std::printf("wall 0 horizontal", wall.horizontal[0]);
+  for(int i = 0; i < 17; i++){
+    wall.horizontal[i] = horizontal[i];
+    wall.vertical[i] = vertical[i];
+  }
 
   fclose(fp);
   
