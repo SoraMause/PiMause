@@ -365,7 +365,7 @@ void Map::storeWall()
 {
   std::FILE *fp;
   fp = std::fopen("maze.txt", "w");
-  fprintf(fp,"dummy");
+  fprintf(fp,"dummy\n");
   for (int i = 0; i < 17; i++)
   {
     std::fprintf(fp, "%d\n", wall.horizontal[i]);
@@ -400,7 +400,7 @@ void Map::loadWall()
     return;
   }
 
-  char dummy[6];
+  char dummy[10];
   std::fscanf(fp ,"%s", dummy);
   std::printf("%s", dummy);
   for(int i = 0; i < 17; i++){
