@@ -284,6 +284,64 @@ void Mode::select()
       while( trape->status() == false );
     } else if(mode_count == 8){
       /* 最短走行追加 */
+      // 壁情報を読み込み
+      maze->loadWall();
+      // 最短走行用のステップマップを作成
+      maze->updateStepMap();
+      // 迷路の現在座標をリセットする
+      Position pos;
+      pos.init();
+      // 次の動作を定義
+      uint8_t next_dir = Front;
+      // パスのカウンタ
+      uint16_t count = 0;
+      // motionを入れる
+      uint8_t path_motion[256];
+      // 直線の数を入れる
+      uint8_t path_count[256];
+
+      while(pos.x != gx || pos.y != gy)
+      {
+        next_dir = maze->updateNextAction(&pos);
+        // 最短走行なので、あり得るのは前or左or右だけ。それ以外はあり得ない。
+        if(next_dir == Front){
+          // 座標を更新
+          maze->updatePosition(&pos, next_dir);
+          // 直進のカウント用変数
+          int straight_count = 1;
+          // 直線が続く限り、直線を追加。
+          while(maze->updateNextAction(&pos) == Front){
+            // 直進のカウントを追加
+            straight_count++;
+            // 座標を更新
+            maze->updatePosition(&pos, Front);
+          }
+          path_motion[count] = Front;
+          path_count[count] = straight_count;
+          count++;
+        } else if(next_dir == Left){
+          maze->updatePosition(&pos, Left);
+          path_motion[count] = Left;
+          path_count[count] = 1;
+          count++;
+        } else if(next_dir == Right){
+          maze->updatePosition(&pos, Right);
+          path_motion[count] = Right;
+          path_count[count] = 1;
+          count++;
+        }
+      }
+
+      for(int i = 0; i < count; i++){
+        if(path_motion[i] == Front){
+          printf("straight %2d blocks\n", path_count[i]);
+        } else if(path_motion[i] == Left){
+          printf("turn left\n");
+        } else if(path_motion[i] == Right){
+          printf("turn right\n");
+        }
+      }
+
     }
     mode_count = 0;
   } 

@@ -101,13 +101,14 @@ public:
 
   // 迷路をtxtから読み出し
   void loadWall();
-
-private:
+  
   // 歩数マップを更新
   void updateStepMap();
 
   // 次の動作を決める
   uint8_t updateNextAction( Position *pos );
+
+private:
 
   // 仮想ゴールの管理を行う
   void manegeVirtualGoal( uint8_t x, uint8_t y, bool manege );
