@@ -25,7 +25,7 @@ private:
   // d[mm/step] = 48.0 * ( 0.9 * pi / 360)
   #define STEP_DISTANCE_CONST 0.37699111843f 
 
-  #define sensor_kp 0.30f
+  #define sensor_kp 0.35f
   #define sensor_kd 1.0f
   #define front_kp 2.0f
 

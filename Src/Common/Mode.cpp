@@ -395,12 +395,12 @@ void Mode::select()
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
           } else if(straight_count > 1){
-            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 700.0f, 0.0f, 0.0f, false );
+            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 600.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
           } else {
-            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 300.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
