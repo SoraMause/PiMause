@@ -370,38 +370,28 @@ void Mode::select()
       for(int i = 0; i < count; i++){
         usleep(10000);
         if(path_motion[i] == Front){
-          if(path_count[i] > 12){
-            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 1500.0f, 0.0f, 0.0f, false );
-            interrupt->setSideSensorControl(true);
-            while( trape->status() == false );
-            interrupt->setSideSensorControl(false);
-          } else if(path_count[i] > 10){
-            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 1400.0f, 0.0f, 0.0f, false );
-            interrupt->setSideSensorControl(true);
-            while( trape->status() == false );
-            interrupt->setSideSensorControl(false);
-          } else if(path_count[i] > 8){
-            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 1300.0f, 0.0f, 0.0f, false );
-            interrupt->setSideSensorControl(true);
-            while( trape->status() == false );
-            interrupt->setSideSensorControl(false);
-          } else if(path_count[i] > 6){
+          if(path_count[i] > 8){
             trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 1200.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
-          } else if(path_count[i] > 4){
-            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 1100.0f, 0.0f, 0.0f, false );
+          } else if(path_count[i] > 6){
+            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 1000.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
-          } else if(path_count[i] > 2){
+          } else if(path_count[i] > 4){
             trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 900.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
+          } else if(path_count[i] > 2){
+            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 700.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
           } else if(path_count[i] > 1){
-            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 600.0f, 0.0f, 0.0f, false );
+            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 500.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
