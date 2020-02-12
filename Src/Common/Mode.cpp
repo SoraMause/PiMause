@@ -303,7 +303,8 @@ void Mode::select()
       uint8_t path_count[256];
       // 直進のカウント用変数
       int straight_count = 0;
-
+      // 迷路を表示
+      maze->show(pos);
       while(pos.x != gx || pos.y != gy)
       {
         next_dir = maze->updateNextAction(&pos);
@@ -339,11 +340,67 @@ void Mode::select()
 
       for(int i = 0; i < count; i++){
         if(path_motion[i] == Front){
-          printf("straight %2d blocks\n", path_count[i]);
+          printf("\nstraight %2d blocks\n", path_count[i]);
         } else if(path_motion[i] == Left){
           printf("turn left\n");
         } else if(path_motion[i] == Right){
           printf("turn right\n");
+        }
+      }
+
+      // 三秒間まつ
+      sleep(3);
+      for(int i = 0; i < count; i++){
+        if(path_motion[i] == Front){
+          if(straight_count > 12){
+            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 300.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
+          } else if(straight_count > 10){
+            trape->makeTrapezoid( 180.0f * path_count[i], 1700.0f, 300.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
+          } else if(straight_count > 8){
+            trape->makeTrapezoid( 180.0f * path_count[i], 1500.0f, 300.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
+          } else if(straight_count > 6){
+            trape->makeTrapezoid( 180.0f * path_count[i], 1300.0f, 300.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
+          } else if(straight_count > 4){
+            trape->makeTrapezoid( 180.0f * path_count[i], 1100.0f, 300.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
+          } else if(straight_count > 2){
+            trape->makeTrapezoid( 180.0f * path_count[i], 900.0f, 300.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
+          } else if(straight_count > 1){
+            trape->makeTrapezoid( 180.0f * path_count[i], 700.0f, 300.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
+          } else {
+            trape->makeTrapezoid( 180.0f * path_count[i], 500.0f, 300.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
+          }
+        } else if(path_motion[i] == Left){
+          interrupt->setSideSensorControl(false);
+          trape->makeTrapezoid( TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
+          while( trape->status() == false );
+        } else if(path_motion[i] == Right){
+          interrupt->setSideSensorControl(false);
+          trape->makeTrapezoid( -TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
+          while( trape->status() == false );
         }
       }
 
