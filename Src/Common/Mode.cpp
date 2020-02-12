@@ -323,18 +323,29 @@ void Mode::select()
           path_motion[count] = Front;
           path_count[count] = straight_count;
           count++;
+          straight_count = 0;
         } else if(next_dir == Left){
-          straight_count = 1;
+          if(straight_count > 0){
+            path_motion[count] = Front;
+            path_count[count] = straight_count;
+            count++;
+          }
           maze->updatePosition(&pos, Left);
           path_motion[count] = Left;
           path_count[count] = 1;
           count++;
-        } else if(next_dir == Right){
           straight_count = 1;
+        } else if(next_dir == Right){
+          if(straight_count > 0){
+            path_motion[count] = Front;
+            path_count[count] = straight_count;
+            count++;
+          }
           maze->updatePosition(&pos, Right);
           path_motion[count] = Right;
           path_count[count] = 1;
           count++;
+          straight_count = 1;
         }
       }
 
