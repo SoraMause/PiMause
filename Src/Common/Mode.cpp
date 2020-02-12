@@ -302,13 +302,16 @@ void Mode::select()
 
       while(pos.x != gx || pos.y != gy)
       {
+        // 直進のカウント用変数
+        int straight_count = 1;
         next_dir = maze->updateNextAction(&pos);
         // 最短走行なので、あり得るのは前or左or右だけ。それ以外はあり得ない。
         if(next_dir == Front){
+          if(count != 0){
+            straight_count++;
+          }
           // 座標を更新
           maze->updatePosition(&pos, next_dir);
-          // 直進のカウント用変数
-          int straight_count = 1;
           // 直線が続く限り、直線を追加。
           while(maze->updateNextAction(&pos) == Front){
             // 直進のカウントを追加
