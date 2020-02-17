@@ -368,7 +368,12 @@ void Mode::select()
       // 三秒間まつ
       sleep(3);
       for(int i = 0; i < count; i++){
+        mtx.lock();
+        bool sw0 = sw->get0();
+        mtx.unlock();
         usleep(10000);
+
+        if( sw0 ) break;
         if(path_motion[i] == Front){
           if(path_count[i] > 8){
             trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 1000.0f, 0.0f, 0.0f, false );
