@@ -35,11 +35,11 @@ void TargetGenerator::getStepFrequency( int *left, int *right, bool back_right )
 {
   // step_sensorの足し引きは暫定
   if ( back_right ){
-    *left += -1 * (step_vel - step_sensor + step_front_sensor);
-    *right += -1 * (step_vel + step_sensor + step_front_sensor);
+    *left += -1 * (step_vel - step_sensor);
+    *right += -1 * (step_vel + step_sensor);
   } else {
-    *left += step_vel + step_sensor;
-    *right += step_vel - step_sensor;
+    *left += step_vel + step_sensor + step_front_sensor;
+    *right += step_vel - step_sensor + step_front_sensor;
   }
 }
 
