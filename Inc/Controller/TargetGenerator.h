@@ -27,7 +27,7 @@ private:
 
   #define sensor_kp 0.30f
   #define sensor_kd 1.2f
-  #define front_kp 0.5f
+  #define front_kp 0.25f
 
 public:
   // コンストラクタ
