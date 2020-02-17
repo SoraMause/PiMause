@@ -26,8 +26,8 @@ private:
   #define STEP_DISTANCE_CONST 0.37699111843f 
 
   #define sensor_kp 0.30f
-  #define sensor_kd 1.0f
-  #define front_kp 0.5f
+  #define sensor_kd 1.2f
+  #define front_kp 0.15f
 
 public:
   // コンストラクタ
