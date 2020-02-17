@@ -375,28 +375,33 @@ void Mode::select()
 
         if( sw0 ) break;
         if(path_motion[i] == Front){
-          if(path_count[i] > 8){
+          if(path_count[i] > 9){
             trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 1000.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
-          } else if(path_count[i] > 6){
+          } else if(path_count[i] > 8){
             trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 900.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
-          } else if(path_count[i] > 4){
+          } else if(path_count[i] > 6){
             trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 800.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
-          } else if(path_count[i] > 2){
+          } else if(path_count[i] > 4){
             trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 700.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
+          } else if(path_count[i] > 2){
+            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 600.0f, 0.0f, 0.0f, false );
+            interrupt->setSideSensorControl(true);
+            while( trape->status() == false );
+            interrupt->setSideSensorControl(false);
           } else if(path_count[i] > 1){
-            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 500.0f, 0.0f, 0.0f, false );
+            trape->makeTrapezoid( 180.0f * path_count[i], 2000.0f, 400.0f, 0.0f, 0.0f, false );
             interrupt->setSideSensorControl(true);
             while( trape->status() == false );
             interrupt->setSideSensorControl(false);
