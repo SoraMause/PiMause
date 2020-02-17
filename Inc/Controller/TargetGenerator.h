@@ -22,8 +22,8 @@ private:
   float step_diff = 0.0f;
 
   // TIRE_RADIUS 48.0f
-  // d[mm/step] = 48.0 * ( 0.9 * pi / 360)
-  #define STEP_DISTANCE_CONST 0.37699111843f 
+  // d[mm/step] = 48.2 * ( 0.9 * pi / 360)
+  #define STEP_DISTANCE_CONST 0.378561836f 
 
   #define sensor_kp 0.30f
   #define sensor_kd 1.0f
