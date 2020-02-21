@@ -235,11 +235,28 @@ void Mode::select()
           interrupt->setSideSensorControl(false);
           trape->makeTrapezoid( TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
+
+          // 左前、右前のセンサの値をみて処理を考える
+          mtx.lock();
+          int front_left = 0;
+          int front_right = 0;
+          for(int i = 0; i < 5; i++){
+            sensor->getSensorFront(front_left, front_right);
+          }
+          mtx.unlock();
+          if(front_left > 300){
+            trape->makeTrapezoid( -TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
+            while( trape->status() == false );
+            trape->makeTrapezoid( 15.0f, 2000.0f, 100.0f, 0.0f, 0.0f, false );
+            while( trape->status() == false );
+            trape->makeTrapezoid( TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
+            while( trape->status() == false );
+          }
+
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           interrupt->setSideSensorControl(true);
           while( trape->status() == false );
           interrupt->setSideSensorControl(false);
-          // 左前、右前のセンサの値をみて処理を考える
         } else if( next_dir == Right) {
           maze->updatePosition(&pos, next_dir);
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
@@ -248,6 +265,24 @@ void Mode::select()
           interrupt->setSideSensorControl(false);
           trape->makeTrapezoid( -TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
           while( trape->status() == false );
+
+          // 左前、右前のセンサの値をみて処理を考える
+          mtx.lock();
+          int front_left = 0;
+          int front_right = 0;
+          for(int i = 0; i < 5; i++){
+            sensor->getSensorFront(front_left, front_right);
+          }
+          mtx.unlock();
+          if(front_left > 300){
+            trape->makeTrapezoid( TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
+            while( trape->status() == false );
+            trape->makeTrapezoid( 15.0f, 2000.0f, 100.0f, 0.0f, 0.0f, false );
+            while( trape->status() == false );
+            trape->makeTrapezoid( -TURN_90, 1000.0f, 200.0f, 0.0f, 0.0f, true );
+            while( trape->status() == false );
+          }
+
           trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
           interrupt->setSideSensorControl(true);
           while( trape->status() == false );
