@@ -30,6 +30,8 @@ private:
   Sensor_Data sen_left;
   Sensor_Data sen_right;
   bool show_status = false;
+  int left_fornt = 0;
+  int right_front = 0;
 
 public:
   // センサークラスのコンストラクタ
@@ -43,6 +45,9 @@ public:
 
   // センサの情報を返す
   void get( Sensor_Data *front, Sensor_Data *left, Sensor_Data *right, ExistWall *real);
+
+  // センサの左右前壁情報を返す
+  void getSensorFront(int &left, int &right);
 
   // リファレンス値をセットする
   void setConstant(int reference, int threshold, int dir );

@@ -85,19 +85,8 @@ void Sensor::setConstant( int reference, int threshold, int dir )
 
 void Sensor::show()
 {
-  //std::FILE *data;
-
-  //int fr = 0;
-  //int r = 0;
-  //int l = 0;
-  //int fl = 0;
-
-  //data = std::fopen("/dev/rtlightsensor0", "r" );
-  //std::fscanf( data, "%d %d %d %d", &fr, &r, &l, &fl );
-  //std::fclose( data );
-
   //update();
-  std::printf( "%d, %d, %d\r\n",sen_front.now, sen_left.now, sen_right.now);
+  std::printf( "%d, %d, %d, %d, %d\r\n",left_fornt, right_front, sen_front.now, sen_left.now, sen_right.now);
 }
 
 /**
@@ -155,6 +144,8 @@ void Sensor::read()
   data = std::fopen("/dev/rtlightsensor0", "r" );
   std::fscanf( data, "%d %d %d %d", &fr, &r, &l, &fl );
   std::fclose( data );
+  left_fornt = fl;
+  right_front = fr;
   sen_front.now = ( fr + fl ) / 2;
   sen_left.now = l;
   sen_right.now = r; 
@@ -199,4 +190,10 @@ void Sensor::updateDiff()
 void Sensor::getWalldata(ExistWall *real)
 {
   *real = exist;
+}
+
+void Sensor::getSensorFront(int &left, int &right)
+{ 
+  left = left_fornt;
+  right = right_front;
 }
