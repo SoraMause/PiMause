@@ -297,8 +297,9 @@ void Mode::select()
       }
       trape->makeTrapezoid( 90.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
       while( trape->status() == false );
-
-      maze->storeWall();
+      if(pos.x == goal_x && pos.y == goal_y){
+        maze->storeWall();
+      }
     } else if(mode_count == 6){
       sleep(1);
       trape->makeTrapezoid( 360.0f, 2000.0f, 300.0f, 0.0f, 0.0f, false );
