@@ -365,6 +365,16 @@ bool Map::checkWall(uint8_t x, uint8_t y)
 void Map::storeWall()
 {
 
+  // 保存用のデータ
+  // 再探索するときに使用する
+  uint16_t horizontal_buff[17];
+  uint16_t vertical_buff[17];
+
+  for(int i = 0; i < 17; i++){
+    horizontal_buff[i] = wall.horizontal[i];
+    vertical_buff[i] = wall.vertical[i];
+  }
+
   // 未探索の場所に壁をいれる
   for(int x = 0; x < 16; x++){
     for(int y = 0; y < 16; y++){
@@ -422,6 +432,12 @@ void Map::storeWall()
   std::fprintf(fp, "\n");
 
   std::fclose(fp);
+
+  // 往復の為にデータを復元
+  for(int i = 0; i < 17; i++){
+    wall.horizontal[i] = horizontal_buff[i];
+    wall.vertical[i] = vertical_buff[i];
+  }
 
 }
 
