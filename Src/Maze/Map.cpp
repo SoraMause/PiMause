@@ -57,6 +57,8 @@ void Map::init()
   wall.horizontal_knwon[0] = 0xffff;
   wall.vertical_known[16] = 0xffff;
   wall.horizontal_knwon[16] = 0xffff;
+
+  manegeNorthWall(0, 0, false);
 }
 
 /**
