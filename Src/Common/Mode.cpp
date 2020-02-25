@@ -82,8 +82,8 @@ void Mode::init()
 void Mode::select()
 {
   init();
-  gx = 7;
-  gy = 7;
+  gx = 3;
+  gy = 3;
 
   sensor->setConstant(1300, 120, Front);
   sensor->setConstant(495, 140, Left);
@@ -141,16 +141,9 @@ void Mode::select()
         usleep(10000);
       }
     } else if( mode_count == 2 ){
-      float vel = 0.0f;
-
-      trape->makeTrapezoid( 180.0f, 2000.0f, 500.0f, 0.0f, 0.0f, false );
-
-      while( trape->status() == false ){
-        vel = trape->getNextVelocity();
-        mtx.lock();
-        std::printf( "%f\n", vel );
-        mtx.unlock();
-      }
+      // ゴール座標を変更する
+      gx = 7;
+      gy = 7;
     } else if( mode_count == 3 ){
       float velocity = 0.0f;
       int left = 0;
