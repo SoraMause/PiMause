@@ -419,6 +419,7 @@ void Mode::select()
         maze->storeWall();
       }
 
+      pos.direction = (pos.direction + 2) % 4;
       goal_x = 0;
       goal_y = 0;
 

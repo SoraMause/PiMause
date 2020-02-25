@@ -408,10 +408,33 @@ void Map::storeWall()
       if (check_wall != 0) w = true;
       else w = false;
 
-      if(!n) manegeNorthWall(x, y, true);
-      if(!s) manegeSouthWall(x, y, true);
-      if(!w) manegeWestWall(x, y, true);
-      if(!e) manegeEastWall(x, y, true);
+      if(!n) {
+        // add north
+        uint16_t data = 1;
+        data <<= x;
+        horizontal_buff[y+1] |= data;
+      }
+
+      if(!s) {
+        // add north
+        uint16_t data = 1;
+        data <<= x;
+        horizontal_buff[y] |= data;
+      }
+
+      if(!w) {
+        // add west
+        uint16_t data = 1;
+        data <<= y;
+        vertical_buff[x] |= data;
+      }
+
+      if(!e) {
+        // add east
+        uint16_t data = 1;
+        data <<= y;
+        vertical_buff[x+1] |= data;
+      }
     }
   }
 
@@ -419,25 +442,19 @@ void Map::storeWall()
   fp = std::fopen("maze.txt", "w");
   for (int i = 0; i < 17; i++)
   {
-    std::fprintf(fp, "%d ", wall.horizontal[i]);
+    std::fprintf(fp, "%d ", horizontal_buff[i]);
   }
 
   std::fprintf(fp, "\n");
 
   for (int i = 0; i < 17; i++)
   {
-    std::fprintf(fp, "%d ", wall.vertical[i]);
+    std::fprintf(fp, "%d ", vertical_buff[i]);
   };
 
   std::fprintf(fp, "\n");
 
   std::fclose(fp);
-
-  // 往復の為にデータを復元
-  for(int i = 0; i < 17; i++){
-    wall.horizontal[i] = horizontal_buff[i];
-    wall.vertical[i] = vertical_buff[i];
-  }
 
 }
 
