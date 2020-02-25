@@ -415,6 +415,7 @@ void Mode::select()
       pos.direction = (pos.direction + 2) % 4;
       goal_x = 0;
       goal_y = 0;
+      maze->setGoal(goal_x, goal_y);
 
       trape->makeTrapezoid( TURN_180, 1000.0f, 200.0f, 0.0f, 0.0f, true );
       while( trape->status() == false );
