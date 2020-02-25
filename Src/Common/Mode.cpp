@@ -518,6 +518,7 @@ void Mode::select()
       while( trape->status() == false );
       if(pos.x == goal_x && pos.y == goal_y){
         maze->storeWall();
+        mode_count = 8;
       }
 
     } else if(mode_count == 7){
@@ -665,6 +666,9 @@ void Mode::select()
       }
 
     }
+    mtx.lock();
+    led->illuminate(0x00);
+    mtx.unlock();
     mode_count = 0;
   } 
 
